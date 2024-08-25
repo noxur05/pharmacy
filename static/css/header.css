@@ -1,0 +1,54 @@
+.logo-size{
+    width: 2rem;
+    height: 2rem;
+    overflow: hidden;
+}
+
+nav .search-place{
+    background: #ECFDF5;
+}
+
+nav .search-place button{
+    background: transparent;
+}
+
+nav .search-place input[type="search"]{
+    background: transparent;
+}
+
+nav .search-place input[type="search"]::placeholder{
+    color: #047857;
+}
+
+nav .search-place input[type="search"]::-ms-clear{
+    color: #047857;
+}
+
+nav .search-place input[type="search"]::-webkit-search-cancel-button,
+nav .search-place input[type="search"]::-webkit-search-decoration{
+    color: #047857;
+}
+
+nav .search-place input[type="search"]:focus{
+    outline: none;
+}
+
+.nowrap{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.button-custom{
+    width: 3rem;
+    height: 3rem;
+}
+
+.dropdown-item{
+    color: #022c22;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus{
+    background: #047857;
+    color: #ECFDF5;
+}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search
+{% endblock title %}
+
+{% block links_and_css %}
+{% endblock links_and_css %}
+
+{% block content %}
+  <div class="my-5">
+    <div class="container-xxl">
+      <div class="h4 mt-5"> 
+      Gozleg
+      </div>
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
+        {% for product in search_products %}
+        <div class="col">
+          <div
+            class="position-relative goods-size overflow-hidden rounded-2 bg-white shadow-sm border img-hover mb-2">
+            {% for image in product.images.all %}
+            <img class="w-100 h-100 pe-0 z-0" src="{{ image.image.url }}" alt="">
+            <div class="position-absolute top-0 end-0 z-1 m-1">
+              <a href="{{ image.image.url }}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden"
+                data-fancybox="gallery">
+                <i class="bi-folder-plus"></i>
+              </a>
+            </div>
+            {% endfor %}
+            <div class="position-absolute bottom-0 start-0 z-1">
+              <span class="rounded-bottom-0 rounded-end-2 bg-8 color-1 px-2 py-1 small">{{ product.sale_price }} TMT</span>
+            </div>
+          </div>
+          <div class="">
+            <div class="row">
+              <div class="col-3 col-xl-2">
+                <!-- Like form -->
+                <form method="POST" class="like-form">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ product.id }}" class="input-field" name="product_id">
+                  <button class="likeBtn btn btn-outline-danger fw-bold rounded-circle btn-sm " data-in-like="{{ product.in_like }}">
+                    {% if product.in_like %}
+                    <i class="bi-heart-fill"></i>
+                    {% else %}
+                    <i class="bi-heart"></i>
+                    {% endif %}
+                  </button>
+                </form>
+              </div>
+              <div class="col-9 col-xl-10 ps-1 ps-sm-0 ps-xl-3">
+                <!-- Add to cart form -->
+                <form method="POST" class="add-form">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ product.id }}" class="input-field" name="product_id">
+                  <button
+                    class="addBtn btn btn-outline-success fw-bold rounded-5 w-100 btn-sm" data-in-cart="{{ product.in_cart }}">
+                    <i class="bi-basket"></i>
+                    <span>
+                      {% if product.in_cart %}
+                        Ayyr
+                      {% else %}
+                        Gosh
+                      {% endif %}
+                    </span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="color-11 fw-bold text-truncate">{{ product.product_name }}</div>
+            <div class="fw-normal text-truncate small h6 fw-normal">
+              {{ product.product_description }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  AOS.init({
+    once: true
+  });
+  $(document).ready(function() {
+    $('[data-fancybox="gallery"]').fancybox({
+    });
+});
+</script>
+{% endblock scripts %}
