@@ -5,4 +5,5 @@ app_name="like_app"
 
 urlpatterns = [
     path('liked/', like_product, name="like_product"),
+    path('', favorite, name="favorite"),
 ]

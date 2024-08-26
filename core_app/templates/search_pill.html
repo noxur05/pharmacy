@@ -23,7 +23,7 @@ Search
             <div class="position-absolute top-0 end-0 z-1 m-1">
               <a href="{{ image.image.url }}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden"
                 data-fancybox="gallery">
-                <i class="bi-folder-plus"></i>
+                <i class="bi bi-zoom-in"></i>
               </a>
             </div>
             {% endfor %}
@@ -32,22 +32,22 @@ Search
             </div>
           </div>
           <div class="">
-            <div class="row">
-              <div class="col-3 col-xl-2">
+            <div class="d-flex">
+              <div class="" style="width: 36px;">
                 <!-- Like form -->
                 <form method="POST" class="like-form">
                   {% csrf_token %}
                   <input type="hidden" value="{{ product.id }}" class="input-field" name="product_id">
                   <button class="likeBtn btn btn-outline-danger fw-bold rounded-circle btn-sm " data-in-like="{{ product.in_like }}">
                     {% if product.in_like %}
-                    <i class="bi-heart-fill"></i>
+                    <i class="bi bi-heart-fill"></i>
                     {% else %}
-                    <i class="bi-heart"></i>
+                    <i class="bi bi-heart"></i>
                     {% endif %}
                   </button>
                 </form>
               </div>
-              <div class="col-9 col-xl-10 ps-1 ps-sm-0 ps-xl-3">
+              <div class="" style="width: calc(100% - 36px);">
                 <!-- Add to cart form -->
                 <form method="POST" class="add-form">
                   {% csrf_token %}

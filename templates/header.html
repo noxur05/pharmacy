@@ -58,15 +58,15 @@
                   <a class="nav-link color-11 p-0" href="/">Bash Sahypa</a>
                 </li>
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="#">Dermanlar</a>
+                  <a class="nav-link color-11 p-0" href="{% url "like_app:favorite" %}">Halanlarym</a>
                 </li>
                 <li class="nav-item col-12 col-lg dropdown position-static">
-                  <a class="nav-link color-11 p-0 dropdown-toggle" data-bs-toggle="dropdown" href="#">Saylananlar</a>
+                  <a class="nav-link color-11 p-0 dropdown-toggle" data-bs-toggle="dropdown" href="#">Kategoriyalar</a>
                   <div class="dropdown-menu w-100 p-1 ps-2">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 fw-normal">
-                      {% for category in categories  %}
+                      {% for category in all_categories  %}
                       <div class="col">
-                        <a class="dropdown-item" href="">{{category.category_name}}</a>
+                        <a class="dropdown-item" href="{% url "product_app:custom-pills" category.id %}">{{category.category_name}}</a>
                       </div>
                       {% endfor %}
                     </div>
@@ -82,18 +82,21 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-3">
-          <div class="row g-2">
+        <div class="col-12 col-lg-3 mt-2 mt-lg-0">
+          <div class="row g-3">
             <div class="col-auto">
-              <a class="btn btn-success rounded-2 text-decoration-none" href="{% url "order_app:cart" %}">
-                <span class=""><i class="bi-basket"></i> Sebet</span>
+              <a class="btn btn-success rounded-2 text-decoration-none position-relative" href="{% url "order_app:cart" %}">
+                <span class=""><i class="bi-basket"></i></span>
+                <span class="position-absolute top-0 ms-2 mt-1 translate-middle badge rounded-pill bg-danger" id="totalQuantity">
+                  {{total_quantity}}
+                </span>
               </a>
             </div>
             <div class="col-auto dropdown">
               <button class="btn btn-success rounded-2 dropdown-toggle" data-bs-toggle="dropdown">
-                <span class=""><i class="bi-globe2"></i> Dil</span>
+                <span class=""><i class="bi-globe2"></i></span>
               </button>
-              <div class="dropdown-menu dropdown-menu-end p-1 p-md-2 w-100">
+              <div class="dropdown-menu dropdown-menu-lg-end p-1 p-md-2 w-100">
                 <div class="row row-cols-1 fw-normal">
                   <div class="col">
                     <a class="dropdown-item" href=""><img src="img/flags/tkm.png" alt=""> Turkmen</a>

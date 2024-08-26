@@ -96,16 +96,21 @@ $(document).ready(function() {
                     quantity.text(response.quantity);
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
+                    $('#totalQuantity').text(response.total_quantity)
+                    button.prop('disabled', false);
+
                 },
                 error: function(response){
                     console.log('Error:', response);
+                    button.prop('disabled', false);
+
                     // Handle the error (e.g., display a message)
                 }
             });
         }
         setTimeout(() => {
             button.prop('disabled', false);
-        }, 150);
+        }, 1000);
     });
 
     $('.decrease-quantity').click(function(decrease){
@@ -131,10 +136,15 @@ $(document).ready(function() {
                     quantity.text(response.quantity);
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
+                    $('#totalQuantity').text(response.total_quantity)
+                    button.prop('disabled', false);
+
 
                 },
                 error: function(response){
                     console.log('Error:', response);
+                    button.prop('disabled', false);
+
                     // Handle the error (e.g., display a message)
                 }
             });
@@ -142,7 +152,7 @@ $(document).ready(function() {
         
         setTimeout(() =>{
             button.prop('disabled', false)
-        }, 150);
+        }, 1000);
     });
     $('.itemRemove').click(function(remove){
         remove.preventDefault();
@@ -166,6 +176,7 @@ $(document).ready(function() {
                 button.closest(".customBodyCart").remove();
                 $(".totalPrice").text(response.total_price.toFixed(2))
                 $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
+                $('#totalQuantity').text(response.total_quantity)
                 $("#itemsList").remove()
                 $('#emptyBasket').removeClass('d-none')
                 $('#openForm').addClass('disabled')
@@ -191,6 +202,8 @@ $(document).ready(function() {
                 button.closest(".customBodyCart").remove();
                 $(".totalPrice").text(response.total_price.toFixed(2))
                 $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
+                $('#totalQuantity').text(response.total_quantity)
+
 
                 if ($('.customBodyCart').length > 0) {
                     $('.customBodyCart').last().removeClass('border-bottom');

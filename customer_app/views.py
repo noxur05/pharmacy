@@ -4,19 +4,17 @@ from .models import *
 import uuid
 
 def get_customer(request):
-    """Helper function to get customer based on authentication or cookies."""
-    try:
+    """Helper function to get customer based on authentication or session."""
+    if request.user.is_authenticated:
         return request.user.customer
-    except:
-        anoUsr = request.COOKIES.get('anoUsr')
-        if anoUsr is None:
-            anoUsr = str(uuid.uuid4())
-            response = HttpResponse()
-            response.set_cookie('anoUsr', anoUsr, max_age=31536000)  # Cookie expires in 1 year
-        else:
-            response = None  # No need to set a new cookie if the anoUsr is already present
-        customer, _ = Customer.objects.get_or_create(anonym_user=anoUsr)
-    return customer
+    else:
+        anonym_user_id = request.session.get('anonym_user_id')
+        
+        if anonym_user_id is None:
+            anonym_user_id = str(uuid.uuid4())
+            request.session['anonym_user_id'] = anonym_user_id
+        customer, created = Customer.objects.get_or_create(anonym_user=anonym_user_id)
+        return customer
 
 def user_location(request):
     customer = get_customer(request)

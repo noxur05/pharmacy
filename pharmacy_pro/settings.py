@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'order_app',
     'product_app',
     'like_app',
-    'ads_app'
+    'ads_app',
+    'admin_app'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'core_app.context_processors.global_context',
             ],
         },
     },
@@ -132,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'static'
+
+SESSION_COOKIE_AGE = 31536000
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_SAVE_EVERY_REQUEST = True

@@ -15,7 +15,8 @@ def cart(request):
         'total_price':order.get_total_price(),
         'total_items_price':order.get_total_items_price(),
         'shipping_price':shipping_price,
-        'shipping_regions':shipping_regions
+        'shipping_regions':shipping_regions,
+        'total_quantity':order.get_total_quantity()
     }
     return render(request, 'basket.html', context)
 
@@ -29,7 +30,11 @@ def quantity_increase(request):
             quantity = product.quantity + 1
             product.quantity = quantity
             product.save()
-        return JsonResponse({'quantity':product.quantity, 'total_price':order.get_total_price(), 'total_items_price':order.get_total_items_price()})
+        return JsonResponse({
+            'quantity':product.quantity,
+            'total_price':order.get_total_price(),
+            'total_items_price':order.get_total_items_price(),
+            'total_quantity':order.get_total_quantity()})
     return render(request, 'basket.html')
 
 def quantity_decrease(request):
@@ -41,7 +46,11 @@ def quantity_decrease(request):
         quantity = product.quantity - 1
         product.quantity = quantity
         product.save()
-        return JsonResponse({'quantity':product.quantity, 'total_price':order.get_total_price(), 'total_items_price':order.get_total_items_price()})
+        return JsonResponse({
+            'quantity':product.quantity, 
+            'total_price':order.get_total_price(), 
+            'total_items_price':order.get_total_items_price(),
+            'total_quantity':order.get_total_quantity()})
     return render(request, 'basket.html')
 
 def item_remove(request):
@@ -51,7 +60,10 @@ def item_remove(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         product = OrderItem.objects.get(order=order, product_id=data)
         product.delete()
-        return JsonResponse({'total_price':order.get_total_price(), 'total_items_price':order.get_total_items_price()})
+        return JsonResponse({
+            'total_price':order.get_total_price(), 
+            'total_items_price':order.get_total_items_price(),
+            'total_quantity':order.get_total_quantity()})
     return render(request, 'basket.html')
 
 def order_remove(request):
@@ -61,7 +73,11 @@ def order_remove(request):
         order, created = Order.objects.get_or_create(id=data,customer=customer, complete=False)
         orderitem = OrderItem.objects.all().filter(order=order)
         orderitem.delete()
-        return JsonResponse({"data":'deleted', 'total_price':order.get_total_price(), 'total_items_price':order.get_total_items_price()})
+        return JsonResponse({
+            "data":'deleted', 
+            'total_price':order.get_total_price(), 
+            'total_items_price':order.get_total_items_price(),
+            'total_quantity':order.get_total_quantity()})
     return render(request, 'basket.html')
 
 def shipping(request):

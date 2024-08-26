@@ -25,7 +25,7 @@ Special Category
             <div class="position-absolute top-0 end-0 z-1 m-1">
               <a href="{{ image.image.url }}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden custom-fancybox"
                 data-fancybox data-caption="{{ product.product_name }} - {{ product.product_description }}">
-                <i class="bi-folder-plus"></i>
+                <i class="bi bi-zoom-in"></i>
               </a>
             </div>
             {% endfor %}
@@ -34,28 +34,28 @@ Special Category
             </div>
           </div>
           <div class="">
-            <div class="row g-1">
-              <div class="col-3">
+            <div class="d-flex">
+              <div class="" style="width: 36px;">
                 <!-- Like form -->
                 <form method="POST" class="like-form">
                   {% csrf_token %}
                   <input type="hidden" value="{{ product.id }}" class="input-field" name="product_id">
-                  <button class="likeBtn btn btn-outline-danger fw-bold rounded-2 w-100 btn-sm" data-in-like="{{ product.in_like }}">
+                  <button class="likeBtn btn btn-outline-danger fw-bold rounded-circle btn-sm" data-in-like="{{ product.in_like }}">
                     {% if product.in_like %}
-                    <i class="bi-heart-fill"></i>
+                    <i class="bi bi-heart-fill"></i>
                     {% else %}
-                    <i class="bi-heart"></i>
+                    <i class="bi bi-heart"></i>
                     {% endif %}
                   </button>
                 </form>
               </div>
-              <div class="col-9">
+              <div class="" style="width: calc(100% - 36px);">
                 <!-- Add to cart form -->
                 <form method="POST" class="add-form">
                   {% csrf_token %}
                   <input type="hidden" value="{{ product.id }}" class="input-field" name="product_id">
                   <button
-                    class="addBtn btn btn-outline-success fw-bold rounded-2 w-100 btn-sm" data-in-cart="{{ product.in_cart }}">
+                    class="addBtn btn btn-outline-success fw-bold rounded-5 w-100 btn-sm" data-in-cart="{{ product.in_cart }}">
                     <i class="bi-basket"></i>
                     <span>
                       {% if product.in_cart %}

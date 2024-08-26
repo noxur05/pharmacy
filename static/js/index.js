@@ -24,15 +24,19 @@ $(document).ready(function() {
             success: function(response){
                 console.log('Success:');
                 button.data('in-cart', inCart ? 'False' : 'True');
+                $('#totalQuantity').text(response.total_quantity)
+                button.prop('disabled', false);
+
             },
             error: function(response){
                 console.log('Error:', response);
+                button.prop('disabled', false);
+
                 // Handle the error (e.g., display a message)
             }
         });
-        setTimeout(() => {
-            button.prop('disabled', false);
-        }, 200);
+        // setTimeout(() => {
+        // }, 200);
     });
 
     $('.likeBtn').click(function(el){
@@ -62,16 +66,20 @@ $(document).ready(function() {
             success: function(response){
                 console.log('Success: Liked');
                 button.data('in-like', inLike ? 'False' : 'True');
+                button.prop('disabled', false);
+
 
             },
             error: function(response){
                 console.log('Error:', response);
+                button.prop('disabled', false);
+
                 // Handle the error (e.g., display a message)
             }
         });
-        setTimeout(() =>{
-            button.prop('disabled', false)
-        }, 200);
+        // setTimeout(() =>{
+        //     button.prop('disabled', false)
+        // }, 200);
     });
 });
 

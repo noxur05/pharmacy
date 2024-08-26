@@ -26,7 +26,7 @@
 
     <script>
         
-        function getCookie(name) {
+        {% comment %} function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 let cookies = document.cookie.split(';');
@@ -57,7 +57,7 @@
             anoUsr = uuidv4()
         }
         
-        document.cookie = 'anoUsr=' + anoUsr + ';domain=;path=/'
+        document.cookie = 'anoUsr=' + anoUsr + ';domain=;path=/' {% endcomment %}
 
     </script>
 

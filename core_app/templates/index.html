@@ -32,7 +32,10 @@
         class="splide splide-goods pb-3 border border-top-0 border-end-0 border-start-0 color-11 my-3 custom-hover" role="group"
         aria-label="Splide Basic HTML Example">
         <div class="h4">
-          <a class="link-dark text-decoration-none" href="{% url "product_app:custom-pills" category.id %}">{{category.category_name}}</a>
+          <a class="d-flex justify-content-between w-100 link-dark text-decoration-none" href="{% url "product_app:custom-pills" category.id %}">
+            {{category.category_name}}
+            <span class=""><i class="bi bi-arrow-right"></i></span>
+          </a>
         </div>
         <div class="splide__track">
           <ul class="splide__list">
@@ -56,26 +59,26 @@
                   </div>
                 </div>
                 <div class="">
-                  <div class="row">
-                    <div class="col-3 col-xl-2">
+                  <div class="d-flex">
+                    <div class="" style="width: 36px;">
                       <form method="POST" class="like-form">
                         {% csrf_token %}
                         <input type="hidden" value="{{product.id}}" class="input-field" name="product_id">
-                        <button class="likeBtn btn btn-sm btn-outline-danger rounded-circle" data-in-like="{{product.in_like}}">
+                        <button class="likeBtn btn btn-sm text-danger border-danger rounded-circle" data-in-like="{{product.in_like}}">
                           {% if product.in_like %}
                           <i class="bi bi-heart-fill"></i>
                           {% else %}
-                          <i class="bi bi-heart"></i>
+                          <i class="bi bi-heart transparent"></i>
                           {% endif %}
                         </button>
                       </form>
                     </div>
-                    <div class="col-9 col-xl-10 ps-1">
+                    <div class="" style="width: calc(100% - 36px);">
                       <form method="POST" class="add-form">
                         {% csrf_token %}
                         <input type="hidden" value="{{product.id}}" class="input-field" name="product_id">
                         <button type="submit"
-                          class="addBtn btn btn-outline-success fw-bold rounded-5 w-100 btn-sm" data-in-cart="{{ product.in_cart }}">
+                          class="addBtn btn btn-sm btn-outline-success rounded-5 w-100 fw-bold" data-in-cart="{{ product.in_cart }}">
                           <i class="bi-basket"></i>
                             <span>
                             {% if product.in_cart %}
@@ -100,6 +103,19 @@
         </div>
       </div>
     {% endfor %}
+    </div>
+    <div class="my-5">
+      <div class="splide" role="group" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide">
+              
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container-xxl">
       <div class="vh-custom my-3" data-aos="zoom-in" data-aos-delay="1200">
         <iframe width="100%" height="100%" frameborder="0" style="border:0"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.679583346109!2d58.3246638764437!3d37.96126690139464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f70005546c14085%3A0x90cefb8f3eb97c2c!2z0JjQvdC20LXQvdC10YDQvdC-LdGC0LXRhdC90L7Qu9C-0LPQuNGH0LXRgdC60LjQuSDRg9C90LjQstC10YDRgdC40YLQtdGCINCi0YPRgNC60LzQtdC90LjRgdGC0LDQvdCwINC40LwuINCe0LPRg9C30YXQsNC90LA!5e0!3m2!1sru!2s!4v1721378961436!5m2!1sru!2s"

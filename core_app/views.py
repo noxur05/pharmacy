@@ -59,4 +59,7 @@ def search_pill(request):
                 product.in_cart = order.products.filter(id=product.id).exists()
                 product.in_like = user_like.products.filter(id=product.id).exists()
     return render(request, 'search_pill.html', {'search_products':results})
+
+def base(request):
+    pass
 # Create your views here.

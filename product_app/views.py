@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
 from customer_app.views import get_customer
 from order_app.models import *
 from like_app.models import *
@@ -28,5 +29,5 @@ def product(request):
             orderItem, created = OrderItem.objects.get_or_create(order=order, product_id=data)
             orderItem.save()
     categories = ProductCategory.objects.all().prefetch_related('products')
-    return render(request, 'index.html', {'categories':categories})
+    return JsonResponse({'total_quantity':order.get_total_quantity()})
 # Create your views here.

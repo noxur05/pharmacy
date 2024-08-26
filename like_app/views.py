@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from customer_app.views import get_customer
+from order_app.models import Order
 
 def like_product(request):
     if request.method == 'POST':
@@ -16,4 +17,18 @@ def like_product(request):
             likeitem, created = LikeItem.objects.get_or_create(like=like, product_id=product.id)
             likeitem.save()
     return render(request, 'index.html')
+
+def favorite(request):
+    customer = get_customer(request)
+    
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    user_like, created = Like.objects.get_or_create(customer=customer)
+    results = user_like.products.prefetch_related('images')
+
+
+    # for category in results:
+    for product in results:
+            product.in_cart = order.products.filter(id=product.id).exists()
+            product.in_like = user_like.products.filter(id=product.id).exists()
+    return render(request, 'search_pill.html', {'search_products':results})
 # Create your views here.

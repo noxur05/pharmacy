@@ -13,6 +13,7 @@ class Advertisement(models.Model):
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True, null=True)
+    is_brand = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.title
