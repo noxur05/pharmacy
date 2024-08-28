@@ -4,17 +4,17 @@
     overflow: hidden;
 }
 
-nav .search-place{
+/* nav .search-place{
     background: #ECFDF5;
 }
 
 nav .search-place button{
     background: transparent;
-}
+} */
 
-nav .search-place input[type="search"]{
+/* nav .search-place input[type="search"]{
     background: transparent;
-}
+} */
 
 nav .search-place input[type="search"]::placeholder{
     color: #047857;

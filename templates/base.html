@@ -23,44 +23,6 @@
     <script src="{% static "js/jquery-3.7.1.min.js" %}"></script>
     <script src="{% static "js/aos.js" %}"></script>
 
-
-    <script>
-        
-        {% comment %} function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++){
-                    let cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-    
-            return cookieValue;
-        }
-        
-        let csrftoken = getCookie('csrftoken');
-    
-        function uuidv4() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8 );
-                return v.toString(16);
-            });
-        }
-        
-        let anoUsr = getCookie('anoUsr')
-        
-        if (anoUsr == null || anoUsr == undefined){
-            anoUsr = uuidv4()
-        }
-        
-        document.cookie = 'anoUsr=' + anoUsr + ';domain=;path=/' {% endcomment %}
-
-    </script>
-
     {% block links_and_css %}{% endblock links_and_css %}
     
 </head>
@@ -77,6 +39,7 @@
     <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
     <script src="{% static "js/fancybox/fancybox.umd.js" %}"></script>
     <script src="{% static "js/splide/splide.min.js" %}"></script>
+    <script src="{% static "js/splide/splide-extension-auto-scroll.min.js" %}"></script>
     <script src="{% static "js/index.js" %}"></script>
     <script src="{% static "js/fontawesome/all.min.js" %}"></script>
     

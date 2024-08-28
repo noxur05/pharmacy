@@ -1,5 +1,5 @@
 {% load static %}
-<header class="bg-3 sticky-top">
+<header class="bg-success-subtle shadow-sm sticky-top">
   <nav class="navbar navbar-expand-lg pb-1">
     <div class="container-xxl">
       <a class="navbar-brand" href="#">
@@ -25,11 +25,11 @@
       </button>
       <div class="w-100 d-lg-none">
         <form method="GET" action="{% url "search-pill" %}">
-          <div class="btn btn-md btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
-            <input class="searchInput border-0 w-100 me-4" name="searchInput" type="search" placeholder="Gozle...">
+          <div class="btn btn-md bg-light btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
+            <input class="searchInput bg-transparent border-0 w-100 me-4 " name="searchInput" type="search" placeholder="Gozle...">
             <div class="position-absolute end-0 me-3">
               {% csrf_token %}
-              <button class="searchButton border-0" type="submit">
+              <button class="searchButton border-0 bg-transparent" type="submit">
                 <i class="bi-search color-11"></i>
               </button>
             </div>
@@ -42,10 +42,10 @@
             <div class="w-100 d-none d-lg-block">
               <form method="GET" action="{% url "search-pill" %}">
                 {% csrf_token %}
-                <div class="btn btn-md btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
-                  <input class="border-0 w-100 me-5" name="searchInput" type="search" placeholder="Gozle...">
+                <div class="btn btn-md bg-light btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
+                  <input class="border-0 w-100 bg-transparent me-5" name="searchInput" type="search" placeholder="Gozle...">
                   <div class="position-absolute end-0 me-3">
-                    <button class="border-0" type="submit">
+                    <button class="border-0 bg-transparent" type="submit">
                       <i class="bi-search color-11"></i>
                     </button>
                   </div>

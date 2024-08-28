@@ -25,9 +25,11 @@ def product(request):
         if product.in_cart:
             orderItem = OrderItem.objects.get(order=order, product_id=data)
             orderItem.delete()
+            status = 'deleted'
         else:
             orderItem, created = OrderItem.objects.get_or_create(order=order, product_id=data)
             orderItem.save()
+            status = 'saved'
     categories = ProductCategory.objects.all().prefetch_related('products')
-    return JsonResponse({'total_quantity':order.get_total_quantity()})
+    return JsonResponse({'total_quantity':order.get_total_quantity(), 'status':status})
 # Create your views here.

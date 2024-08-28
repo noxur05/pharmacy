@@ -1,5 +1,41 @@
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Carousel 1
+
+    const splide = new Splide( '.brandSplide', {
+        type   : 'loop',
+        drag   : 'free',
+        focus  : 'center',
+        gap: '1.5rem',
+        arrows: false,
+        pagination: false,
+        perPage: 7,
+        breakpoints: {
+          1200: {
+              perPage: 5
+          },
+          992: {
+              perPage: 4,
+              gap: "1.2rem"
+          },
+          768: {
+              perPage: 3,
+              gap: "1rem"
+          },
+          576: {
+              perPage: 2,
+              gap: "1rem"
+          },
+          330: {
+              perPage: 1,
+              gap: "1rem"
+          },
+        },
+        autoScroll: {
+          speed: 2,
+        },
+    } );
+    splide.mount(window.splide.Extensions);
+
     new Splide('#carousel-ads', {
         arrows: false,
         pagination: false,
@@ -12,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(document).ready(function() {
         $('[data-fancybox]').fancybox({
-            // Custom options
         });
     });
 
@@ -57,26 +92,26 @@ $(window).on("ready load resize", function () {
     $("#pagePush").css({"height": $("#pageFooter").height()});
 });
 
-
-
 $(document).ready(function() {
     if ($('.customBodyCart').length > 0) {
         $('.customBodyCart').last().removeClass('border-bottom');
         $('#openForm').removeClass('disabled')
-
     }
     else{
         $("#itemsList").remove()
         $('#emptyBasket').removeClass('d-none')
         $('#openForm').addClass('disabled')
     }
+
+    // Increase starts from Here
+
     $('.increase-quantity').click(function(increase){
         increase.preventDefault();
         let button = $(this);
         let quantity = button.siblings('.productQuantity');
         let stock = quantity.attr('data-stock');
         console.log(stock);
-        button.prop('disabled', true);
+        button.attr("disabled", true);
         if (quantity.text() == stock){
             button.removeClass('btn-outline-success').addClass('btn-danger')
             setTimeout(() => {
@@ -86,7 +121,7 @@ $(document).ready(function() {
         else{
             $.ajax({
                 type: 'POST',
-                url: '/order/increase/',  // Replace with your view's URL
+                url: '/order/increase/',
                 data: {
                     'data': button.val(),
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
@@ -97,14 +132,11 @@ $(document).ready(function() {
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
                     $('#totalQuantity').text(response.total_quantity)
-                    button.prop('disabled', false);
-
+                    button.attr("disabled", false);
                 },
                 error: function(response){
                     console.log('Error:', response);
-                    button.prop('disabled', false);
-
-                    // Handle the error (e.g., display a message)
+                    button.attr("disabled", false);
                 }
             });
         }
@@ -113,20 +145,23 @@ $(document).ready(function() {
         }, 1000);
     });
 
+    // Decrease Starts from Here
+
     $('.decrease-quantity').click(function(decrease){
         decrease.preventDefault();
         let button = $(this);
         let quantity = button.siblings('.productQuantity');
         let stock = quantity.attr('data-stock');
         console.log(stock);
-        button.prop('disabled', true);
+        button.attr("disabled", true);
+
         if (quantity.text() == 1) {
             removeItem(button);
         }
         else{
             $.ajax({
                 type: 'POST',
-                url: '/order/decrease/',  // Replace with your view's URL
+                url: '/order/decrease/', 
                 data: {
                     'data': button.val(),
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
@@ -137,29 +172,26 @@ $(document).ready(function() {
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
                     $('#totalQuantity').text(response.total_quantity)
-                    button.prop('disabled', false);
-
-
+                    button.attr("disabled", false);
                 },
                 error: function(response){
                     console.log('Error:', response);
-                    button.prop('disabled', false);
-
-                    // Handle the error (e.g., display a message)
+                    button.attr("disabled", false);
                 }
             });
         }
-        
         setTimeout(() =>{
             button.prop('disabled', false)
         }, 1000);
     });
+
     $('.itemRemove').click(function(remove){
         remove.preventDefault();
         console.log('clicked')
         let button = $(this);
         removeItem(button);
     });
+
     $('.orderRemove').click(function(remove){
         remove.preventDefault();
         let button = $(this);
@@ -180,11 +212,9 @@ $(document).ready(function() {
                 $("#itemsList").remove()
                 $('#emptyBasket').removeClass('d-none')
                 $('#openForm').addClass('disabled')
-
             },
             error: function(response){
                 console.log('Error:', response);
-                // Handle the error (e.g., display a message)
             }
         });
     });
@@ -192,7 +222,7 @@ $(document).ready(function() {
     function removeItem(button){
         $.ajax({
             type: 'POST',
-            url: '/order/item-remove/',  // Replace with your view's URL
+            url: '/order/item-remove/',
             data: {
                 'data': button.val(),
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
@@ -204,24 +234,18 @@ $(document).ready(function() {
                 $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
                 $('#totalQuantity').text(response.total_quantity)
 
-
                 if ($('.customBodyCart').length > 0) {
                     $('.customBodyCart').last().removeClass('border-bottom');
                     $('#openForm').removeClass('disabled')
-
                 }
                 else{
                     $("#itemsList").remove()
                     $('#emptyBasket').removeClass('d-none')
                     $('#openForm').addClass('disabled')
-
                 }
-                
-
             },
             error: function(response){
                 console.log('Error:', response);
-                // Handle the error (e.g., display a message)
             }
         });
     }
@@ -229,8 +253,6 @@ $(document).ready(function() {
         $('.confirmShipping').click(function(element){
             element.preventDefault();
             let button = $(this);
-        
-            // Get values from inputs
             let fullName = $('#fullName');
             let phoneNumber = $('#phoneNumber');
             let regionName = $('#regionName');
@@ -240,24 +262,22 @@ $(document).ready(function() {
         
             button.prop('disabled', true);
         
-            // Create an array of the input elements (not the values)
             let inputs = [fullName, phoneNumber, shippingStreet, shippingNote];
             let isFormValid = true;
         
-            // Loop through the inputs and validate them
             inputs.forEach(function(input) {
                 if (input.val() === '') {
-                    isFormValid = false;  // Set form validity to false
-                    input.addClass('is-invalid');  // Add validation error class
+                    isFormValid = false; 
+                    input.addClass('is-invalid');
                 } else {
-                    input.removeClass('is-invalid');  // Remove validation error class
+                    input.removeClass('is-invalid');
                 }
             });
         
             if (isFormValid) {
                 $.ajax({
                     type: 'POST',
-                    url: '/order/shipping/',  // Replace with your view's URL
+                    url: '/order/shipping/',
                     data: {
                         'fullName': fullName.val(),
                         'phoneNumber': phoneNumber.val(),
@@ -273,10 +293,10 @@ $(document).ready(function() {
                         $("#itemsList").remove()
                         $('#emptyBasket').removeClass('d-none')
                         $('#openForm').addClass('disabled')
+                        $('#totalQuantity').text(response.total_quantity)
                     },
                     error: function(response){
                         console.log('Error:', response);
-                        // Handle the error (e.g., display a message)
                     }
                 });
             }
@@ -290,7 +310,7 @@ $(document).ready(function() {
     function userLocation(userIp, userCity, userRegion, userCountry, userLatitude, userLongitude){
         $.ajax({
             type: 'POST',
-            url: '/customer/location/',  // Replace with your view's URL
+            url: '/customer/location/',
             data: {
                 'userIp': userIp,
                 'userCity': userCity,
@@ -302,11 +322,9 @@ $(document).ready(function() {
             },
             success: function(response){
                 console.log('Success: User location was taken');
-
             },
             error: function(response){
                 console.log('Error:', response);
-                // Handle the error (e.g., display a message)
             }
         });
     } 
@@ -328,7 +346,6 @@ $(document).ready(function() {
     }    
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
     let truncateElements = document.querySelectorAll('.truncate-text');
     truncateElements.forEach(function (element) {
@@ -341,6 +358,3 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 });
-
-
-// Call the function to fetch and display location data

@@ -3,13 +3,7 @@ $(document).ready(function() {
         event.preventDefault();
         let button = $(this);
         let inCart = button.data('in-cart') === 'True';
-        if (inCart) {
-            console.log('Removed from Cart');
-            button.find('span').text('Gosh');
-        } else {
-            button.find('span').text('Ayyr');
-            console.log('Added to Cart');
-        }
+        
         let form = button.closest('.add-form');
         let productId = form.find('input[name="product_id"]').val();
         button.prop('disabled', true);
@@ -25,18 +19,21 @@ $(document).ready(function() {
                 console.log('Success:');
                 button.data('in-cart', inCart ? 'False' : 'True');
                 $('#totalQuantity').text(response.total_quantity)
+                if (response.status == 'deleted') {
+                    console.log('Removed from Cart');
+                    button.find('span').text('Gosh');
+                } 
+                else {
+                    button.find('span').text('Ayyr');
+                    console.log('Added to Cart');
+                }
                 button.prop('disabled', false);
-
             },
             error: function(response){
                 console.log('Error:', response);
                 button.prop('disabled', false);
-
-                // Handle the error (e.g., display a message)
             }
         });
-        // setTimeout(() => {
-        // }, 200);
     });
 
     $('.likeBtn').click(function(el){

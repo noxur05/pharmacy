@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
+import json
 from .models import *
 from customer_app.views import get_customer
 
@@ -92,9 +93,10 @@ def shipping(request):
 
         region_name = get_object_or_404(ShippingRegion, id=region_id)
 
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        order = Order.objects.get(customer=customer, complete=False)
         shipping_address = ShippingAddress.objects.create(customer=customer, customer_name=full_name, phone_number=phone_number, order=order, region_name=region_name, address=shipping_street, note=shipping_note, payment_type=pay_type)
         order.complete = True
         order.save()
-    return render(request, 'basket.html')
+        order = Order.objects.create(customer=customer, complete=False)
+    return JsonResponse({'total_quantity':order.get_total_quantity()})
 # Create your views here.
