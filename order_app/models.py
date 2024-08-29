@@ -29,6 +29,11 @@ class Order(models.Model):
     
         return total
 
+    def save(self, *args, **kwargs):
+        if not self.id and not self.date_ordered:
+            self.date_ordered = timezone.now()
+        super().save(*args, **kwargs)
+
     def get_total_items_price(self):
         total = sum(item.get_total_item_price() for item in self.orderitems.all())
         self.total_items_price = total
@@ -47,6 +52,11 @@ class OrderItem(models.Model):
     
     def get_total_item_price(self):
         return self.product.sale_price * self.quantity
+    
+    def save(self, *args, **kwargs):
+        if not self.id and not self.date_added:
+            self.date_added = timezone.now()
+        super().save(*args, **kwargs)
 class ShippingRegion(models.Model):
     region_name = models.CharField(max_length=235)
 
@@ -72,6 +82,11 @@ class ShippingAddress(models.Model):
     date_added = models.DateTimeField(auto_now_add=True, null=True)
     payment_type = models.CharField(max_length=50, choices=PAYMENT_CHOICES, default=CASH, null=True)
     note = models.TextField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id and not self.date_added:
+            self.date_added = timezone.now()
+        super().save(*args, **kwargs)
 
 class ShippingConfig(models.Model):
     shipping_price = models.FloatField(default=20.00)  # Default price

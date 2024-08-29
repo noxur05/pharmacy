@@ -11,6 +11,11 @@ class Like(models.Model):
     def __str__(self):
         return str(self.customer)
     
+    def save(self, *args, **kwargs):
+        if not self.id and not self.created_at:
+            self.created_at = timezone.now()
+        super().save(*args, **kwargs)
+    
     
 class LikeItem(models.Model):
     like = models.ForeignKey(Like, on_delete=models.CASCADE, null=True)

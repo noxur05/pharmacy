@@ -26,7 +26,8 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.product_name + ' - ' + str(self.category_name)
+        categories = ', '.join([category.category_name for category in self.category_name.all()])
+        return f"{self.product_name} ({categories})"
 
 
         

@@ -12,18 +12,17 @@ from ads_app.models import *
 from customer_app.views import get_customer
 
 from django.utils import timezone
-from django.shortcuts import render
 
 def home(request):
     categories = ProductCategory.objects.all().prefetch_related('products')
     customer = get_customer(request)
-    # Fetch user order and likes
+    
     user_order, _ = Order.objects.get_or_create(customer=customer, complete=False)
     user_like, _ = Like.objects.get_or_create(customer=customer)
-    # Pre-fetch product IDs in cart and likes
+    
     cart_product_ids = set(user_order.products.values_list('id', flat=True))
     liked_product_ids = set(user_like.products.values_list('id', flat=True))
-    # Annotate products with in_cart and in_like
+    
     for category in categories:
         for product in category.products.all():
             product.in_cart = product.id in cart_product_ids
@@ -56,7 +55,11 @@ def home(request):
     
     Advertisement.objects.filter(id__in=active_ad_ids).update(is_active=True)
     Advertisement.objects.exclude(id__in=active_ad_ids).update(is_active=False)
-    return render(request, 'index.html', {'categories': categories, 'ads': ads_list, 'brands':brands_list})
+    return render(request, 'index.html', {
+        'categories': categories, 
+        'ads': ads_list, 
+        'brands':brands_list
+    })
 
 def search_pill(request):
     customer = get_customer(request)
@@ -73,7 +76,4 @@ def search_pill(request):
                 product.in_cart = order.products.filter(id=product.id).exists()
                 product.in_like = user_like.products.filter(id=product.id).exists()
     return render(request, 'search_pill.html', {'search_products':results})
-
-def base(request):
-    pass
 # Create your views here.
