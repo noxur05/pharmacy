@@ -4,13 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel</title>
+  <title>{% block title %}Admin Panel{% endblock title %}</title>
   <link rel="shortcut icon" href="{% static "media/icons/medical.png" %}" type="image/x-icon">
 
   <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
   <link rel="stylesheet" href="{% static "css/bootstrap-icons.min.css" %}">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
   <script src="{% static "js/jquery-3.7.1.min.js" %}"></script>
+
+  {% block links_and_css %}{% endblock links_and_css %}
+
 
 </head>
 <body>
@@ -51,9 +54,14 @@
     </div>
   </div>
   <div class="container-xxl">
+    {% block content %}{% endblock content %}
+
     {% load custom_filters %}
     {% if selected_model_name %}
-    <div class="fs-4 mt-5 mb-2">{{selected_model_name}}</div>
+    <div class=" mt-5 mb-2">
+      <span class="fs-4">{{selected_model_name}}</span>
+      <a class="btn btn-success btn-sm" href="{% url "admin_app:add-object" %}?add-object={{selected_model_name}}">Add</a>
+    </div>
     <table class="table table-striped overflow-x-auto w-100">
       <thead>
         <tr>
@@ -75,5 +83,8 @@
     {% endif %}
   </div>
   <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+  
+  {% block scripts %}{% endblock scripts %}
+
 </body>
 </html>

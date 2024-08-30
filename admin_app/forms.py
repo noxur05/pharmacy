@@ -2,6 +2,7 @@ from django import forms
 from customer_app.models import *
 from order_app.models import *
 from product_app.models import *
+from like_app.models import *
 
 class CustomerForm(forms.ModelForm):
     
@@ -17,10 +18,22 @@ class CustomerLocationForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
+
+    date_added_display = forms.DateTimeField(required=False,
+    widget=forms.TextInput(attrs={'readonly':'readonly'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance and self.instance.pk:
+            self.fields['date_added_display'].initial = self.instance.date_ordered 
     
     class Meta:
         model = Order
         fields = ("customer", "total_items_price", "total_price", "complete",)
+    
+    
 
 class OrderItemForm(forms.ModelForm):
 
@@ -69,6 +82,30 @@ class ProductImageForm(forms.ModelForm):
         model = ProductImage
         fields = ("product_name","image",)
 
+class ShippingConfigForm(forms.ModelForm):
+    
+    class Meta:
+        model = ShippingConfig
+        fields = ("shipping_price",)
+
+class LikeForm(forms.ModelForm):
+
+    date_added_display = forms.DateTimeField(required=False,
+    widget=forms.TextInput(attrs={'readonly':'readonly'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance and self.instance.pk:
+            self.fields['date_added_display'].initial = self.instance.created_at 
+    
+    class Meta:
+        model = Like
+        fields = ("customer","products")
+
+
+
 
 MODEL_FORM_MAP = {
     'Customer':CustomerForm(),
@@ -80,6 +117,9 @@ MODEL_FORM_MAP = {
     'OrderItem':OrderItemForm(),
     'ShippingRegion':ShippingRegionForm(),
     'ShippingAddress':ShippingAddressForm(),
+    'ShippingConfig':ShippingConfigForm(),
+    'Like':LikeForm(),
+
 }
 
 

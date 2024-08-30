@@ -25,6 +25,20 @@ def admin_dashboard(request):
         'selected_model_field':form_field_names,
         'selected_model_objects':model_objects,
      })
+
+@login_required
+@user_passes_test(superuser_required)
 def main(request):
     return render(request, 'admin_panel.html')
+
+@user_passes_test(superuser_required)
+def add_object(request):
+    apps_to_include = ['customer_app', 'product_app', 'order_app', 'like_app', 'ads_app']
+
+    selected_model_name=request.GET.get("add-object")
+
+    selected_model_form = MODEL_FORM_MAP.get(selected_model_name)
+    print(selected_model_form)
+
+    return render(request, "add_object.html", {'form':selected_model_form})
 # Create your views here.

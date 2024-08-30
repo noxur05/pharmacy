@@ -15,7 +15,7 @@ class Order(models.Model):
     total_price = models.FloatField(null=True)
 
     def __str__(self):
-        return str(self.customer)
+        return str(self.customer) + ' ' + str(self.date_ordered)
     
     def get_total_quantity(self):
         return sum(item.quantity for item in self.orderitems.all())

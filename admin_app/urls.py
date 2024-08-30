@@ -5,5 +5,6 @@ app_name="admin_app"
 
 urlpatterns = [
     path('', main, name="main"),
+    path('add/', add_object, name="add-object"),
     path('dashboard/', admin_dashboard, name="admin-dashboard")
 ]
