@@ -40,12 +40,15 @@
         <tr>
               <th class="bg-dark-subtle border-top border-bottom">{{app_name|upper}}</th>
         </tr>
-        {% for model_name in models %}
+        {% for model in models %}
         <tr class="">
-          <td>
-            <a class="link-dark text-decoration-none" href="{% url "admin_app:admin-dashboard" %}?model={{model_name}}">
-            {{model_name}}
+          <td class="d-flex w-100 justify-content-between">
+            <a class="link-dark text-decoration-none" href="{% url "admin_app:admin-dashboard" %}?model={{model.name}}">
+            {{model.name}}
             </a>
+            {% if model.in_list %}
+              <a class="btn btn-success btn-sm small" href="{% url "admin_app:add-object" %}?add-object={{model.name}}"><span class="bi bi-plus"><span></a>
+            {% endif %}
           </td>
         </tr>
         {% endfor %}
@@ -57,11 +60,15 @@
     {% block content %}{% endblock content %}
 
     {% load custom_filters %}
-    {% if selected_model_name %}
-    <div class=" mt-5 mb-2">
-      <span class="fs-4">{{selected_model_name}}</span>
-      <a class="btn btn-success btn-sm" href="{% url "admin_app:add-object" %}?add-object={{selected_model_name}}">Add</a>
+    {% if model_name %}
+    {% for model, info in model_name.items %}
+    <div class="mt-5 mb-2 d-flex w-100 justify-content-between">
+      <span class="fs-4">{{model}}</span>
+      {% if info.in_list %}
+        <a class="btn btn-success" href="{% url "admin_app:add-object" %}?add-object={{model}}"><span class="bi bi-plus"><span></a>
+      {% endif %}
     </div>
+    {% endfor %}
     <table class="table table-striped overflow-x-auto w-100">
       <thead>
         <tr>
@@ -83,6 +90,7 @@
     {% endif %}
   </div>
   <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "adminscript.js" %}"></script>
   
   {% block scripts %}{% endblock scripts %}
 
