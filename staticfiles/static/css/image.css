@@ -1,0 +1,29 @@
+.bg-image {
+    background-image: url("../img/home-bg-slideshow.jpg");
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-image2 {
+    background-image: url("../img/testimonial-bg.jpg");
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-black-50 {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bg-orange-50 {
+    background: linear-gradient(to right, rgba(252, 136, 3, 0.5), rgba(255, 0, 0, 0.5));
+}
+
+/* .bg-gradient {
+    background-image: radial-gradient(circle, #eeeeee, #ebebeb, #e8e8e8, #e6e6e6, #e3e3e3, #dfdfdf, #dbdbdb, #d7d7d7, #d0d0d0, #cacaca, #c3c3c3, #bdbdbd);
+} */

@@ -1,0 +1,20 @@
+{% extends "admin_panel.html" %}
+
+{% block title %}Add objects{% endblock title %}
+
+{% block links_and_css %}{% endblock links_and_css %}
+
+{% block content %}
+<form method="POST" id="parent-form">
+    {% csrf_token %}
+    <input type="hidden" value="{{selected_model_name}}" id="selected_model_name">
+    {{parent_form.as_p}}
+    {{child_formset.management_form}}
+    {% for form in child_formset %}
+    {{form.as_p}}
+    {% endfor %}
+    <button type="button" class="submitButton btn btn-success mt-3">Save</button>
+</form>
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

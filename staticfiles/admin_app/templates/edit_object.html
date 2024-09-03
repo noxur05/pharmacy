@@ -1,0 +1,18 @@
+{% extends "admin_panel.html" %}
+
+{% block title %}Edit Object{% endblock title %}
+
+{% block links_and_css %}{% endblock links_and_css %}
+
+{% block content %}
+<div class="mt-5">
+    <form method="POST" id="parent-form">
+        {% csrf_token %}
+        <input type="hidden" value="{{selected_model_name}}" id="editedModelName">
+        {{form.as_p}}
+        <button type="button" class="editButton btn btn-warning mt-3">Edit</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}
