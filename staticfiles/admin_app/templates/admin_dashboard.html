@@ -1,0 +1,76 @@
+{% extends "admin_panel.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block links_and_css %}{% endblock links_and_css %}
+
+{% block content %}
+{% load custom_filters %}
+{% if model_name %}
+  {% for model, info in model_name.items %}
+  <div class="mt-5 mb-2 d-flex w-100 justify-content-between">
+    <span class="fs-4">{{model}}</span>
+    <input type="hidden" value="{{model}}" id="nameModel">
+    {% csrf_token %}
+    {% if info.in_list %}
+      <a class="btn btn-success" href="{% url "admin_app:add-object" %}?add-object={{model}}"><span class="bi bi-plus"><span></a>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <div class="w-100 overflow-x-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        {% for field in selected_model_field %}
+          <th class="bg-dark-subtle">{{field|title}}</th>
+        {% endfor %}
+        {% for model, info in model_name.items %}
+          {% if info.in_list %}
+            <th class="bg-dark-subtle">Edit</th>
+            <th class="bg-dark-subtle">Delete</th>
+          {% endif %}
+        {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for obj in selected_model_objects %}
+        <tr class="objectList">
+        {% for field in selected_model_field %}
+          <td>{{obj|get_attr:field}}</td>
+        {% endfor %}
+        {% for model, info in model_name.items %}
+          {% if info.in_list %}
+          <form method="POST" action="{% url "admin_app:edit" %}">
+            {% csrf_token %}
+            <input type="hidden" value="{{model}}" name="model">
+            <input type="hidden" value="{{obj.id}}" name="id">
+            <td><button type="submit" class="editBtn btn btn-sm btn-warning" value="{{obj.id}}"><span class="bi bi-pen"></span></button></td>
+          </form>
+          <td><button class="deleteBtn btn btn-sm btn-danger" value="{{obj.id}}" data-bs-toggle="modal" data-bs-target="#deleteForm"><span class="bi bi-dash"></span></button></td>
+          {% endif %}
+        {% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="modal fade" id="deleteForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteFormLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-1">
+          <div class="modal-body row g-3">
+            <div class="col-12">Siz hakykatdan hem pozmak isleyarsinizmi</div>
+            <div class="col-12">
+              <div class="d-flex w-100 justify-content-end">
+                <button type="button" class="deleteConfirm btn btn-danger btn-sm mx-1">Hawa</button>
+                <button type="button" class="btn btn-secondary btn-sm mx-1" data-bs-dismiss="modal">Yok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}
+

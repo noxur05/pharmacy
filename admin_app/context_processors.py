@@ -5,7 +5,7 @@ from .forms import ADD_OBJECT_LIST
 
 def superuser_required(user):
     return user.is_superuser
-
+    
 def global_context(request):
     apps_to_include = ['customer_app', 'product_app', 'order_app', 'like_app', 'ads_app']
     app_models = {}

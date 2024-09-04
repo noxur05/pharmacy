@@ -104,6 +104,12 @@ input[type="number"]:focus{
     border-color:#022c22;
 }
 
+.loginForm:focus{
+    outline: none;
+    box-shadow: none;
+    border-color:#3b3c3c;
+}
+
 .modal textarea:focus{
     outline: none;
     box-shadow: none;

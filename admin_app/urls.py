@@ -6,8 +6,8 @@ app_name="admin_app"
 urlpatterns = [
     path('', main, name="main"),
     path('add/', add_object, name="add-object"),
-    # path('add-inline/', add_inline_object, name="add-inline"),
     path('edit/', edit, name="edit"),
-    path('edit-object/<str:form>/', edit_object, name="edit-object"),
+    path('delete/', delete, name="delete"),
+    path('login/', user_login, name="login"),
     path('dashboard/', admin_dashboard, name="admin-dashboard")
 ]

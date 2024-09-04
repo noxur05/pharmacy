@@ -6,11 +6,12 @@
 
 {% block content %}
 <div class="mt-5">
-    <form method="POST" id="parent-form">
+    <form method="POST" id="parent-form" action="{% url "admin_app:edit" %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" value="{{selected_model_name}}" id="editedModelName">
+        <input type="hidden" value="{{selected_model_name}}" id="editedModelName" name="model">
+        <input type="hidden" value="{{id}}" id="editedModelName" name="id">
         {{form.as_p}}
-        <button type="button" class="editButton btn btn-warning mt-3">Edit</button>
+        <button type="submit" class="editButton btn btn-warning mt-3">Edit</button>
     </form>
 </div>
 {% endblock content %}

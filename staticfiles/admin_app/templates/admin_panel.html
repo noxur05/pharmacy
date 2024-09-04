@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -58,57 +58,6 @@
   </div>
   <div class="container-xxl">
   {% block content %}{% endblock content %}
-
-  {% load custom_filters %}
-  {% if model_name %}
-    {% for model, info in model_name.items %}
-    <div class="mt-5 mb-2 d-flex w-100 justify-content-between">
-      <span class="fs-4">{{model}}</span>
-      <input type="hidden" value="{{model}}" id="nameModel">
-      {% csrf_token %}
-      {% if info.in_list %}
-        <a class="btn btn-success" href="{% url "admin_app:add-object" %}?add-object={{model}}"><span class="bi bi-plus"><span></a>
-      {% endif %}
-    </div>
-    {% endfor %}
-    <div class="w-100 overflow-x-auto">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-          {% for field in selected_model_field %}
-            <th class="bg-dark-subtle">{{field|title}}</th>
-          {% endfor %}
-          {% for model, info in model_name.items %}
-            {% if info.in_list %}
-              <th class="bg-dark-subtle">Edit</th>
-              <th class="bg-dark-subtle">Delete</th>
-            {% endif %}
-          {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-        {% for obj in selected_model_objects %}
-          <tr>
-          {% for field in selected_model_field %}
-            <td>{{obj|get_attr:field}}</td>
-          {% endfor %}
-          {% for model, info in model_name.items %}
-            {% if info.in_list %}
-            <form method="POST" action="{% url "admin_app:edit" %}">
-              {% csrf_token %}
-              <input type="hidden" value="{{model}}" name="model">
-              <input type="hidden" value="{{obj.id}}" name="id">
-              <td><button type="submit" class="editBtn btn btn-sm btn-warning" value="{{obj.id}}"><span class="bi bi-pen"></span></button></td>
-            </form>
-            <td><button class="deleteBtn btn btn-sm btn-danger" value="{{obj.id}}"><span class="bi bi-dash"></span></button></td>
-            {% endif %}
-          {% endfor %}
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
   </div>
   <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
   <script src="{% static "adminscript.js" %}"></script>

@@ -11,7 +11,7 @@ import os
 import sys
 
 # Add your project directory to the sys.path
-path = '/home/noxur05/pharmacy_pro'
+path = '/home/noxur05/pharmacy'
 if path not in sys.path:
     sys.path.append(path)
 
