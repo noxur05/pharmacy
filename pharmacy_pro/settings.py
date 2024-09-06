@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'product_app',
     'like_app',
     'ads_app',
-    'admin_app'
+    'admin_app',
+
+    'django_filters'
 ]
 
 MIDDLEWARE = [

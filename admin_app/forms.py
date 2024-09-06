@@ -21,35 +21,16 @@ class CustomerLocationForm(forms.ModelForm):
 
 class OrderForm(forms.ModelForm):
 
-    date_added_display = forms.DateTimeField(required=False,
-    widget=forms.TextInput(attrs={'readonly':'readonly'})
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        if self.instance and self.instance.pk:
-            self.fields['date_added_display'].initial = self.instance.date_ordered 
-    
     class Meta:
         model = Order
-        fields = ("customer", "total_items_price", "total_price", "complete",)
+        fields = "__all__"
 
 class OrderItemForm(forms.ModelForm):
 
-    date_added_display = forms.DateTimeField(required=False,
-    widget=forms.TextInput(attrs={'readonly':'readonly'})
-    )
-    
     class Meta:
         model = OrderItem
-        fields = ("product","order","quantity",)
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        fields = "__all__"
 
-        if self.instance and self.instance.pk:
-            self.fields['date_added_display'].initial = self.instance.date_added
 
 class ShippingRegionForm(forms.ModelForm):
     
@@ -66,7 +47,7 @@ class ShippingAddressForm(forms.ModelForm):
     
     class Meta:
         model = ShippingAddress
-        fields = ("customer", "customer_name", "phone_number", "order", "region_name", "address", "payment_type", "note")
+        fields = "__all__"
 
 class ProductForm(forms.ModelForm):
     
@@ -76,6 +57,7 @@ class ProductForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
+
 
         self.fields['category_name'].widget.attrs['class'] = 'form-control'
         self.fields['product_name'].widget.attrs['class'] = 'form-control'
@@ -114,25 +96,21 @@ class ShippingConfigForm(forms.ModelForm):
         fields = ("shipping_price",)
 
 class LikeForm(forms.ModelForm):
-
-    date_added_display = forms.DateTimeField(required=False,
-    widget=forms.TextInput(attrs={'readonly':'readonly'})
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        if self.instance and self.instance.pk:
-            self.fields['date_added_display'].initial = self.instance.created_at 
     
     class Meta:
         model = Like
-        fields = ("customer","products")
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.fields['products'].widget = forms.CheckboxSelectMultiple()
+
 class LikeItemForm(forms.ModelForm):
     
     class Meta:
         model = LikeItem
-        fields = ("like","product",)
+        fields = "__all__"
 
 class AdvertisementForm(forms.ModelForm):
     
@@ -172,7 +150,6 @@ class CustomChildFormSet(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
         super(CustomChildFormSet, self).__init__(*args, **kwargs)
         for form in self.forms:
-            # Remove the DELETE field from each form in the formset
             if 'DELETE' in form.fields:
                 form.fields.pop('DELETE')
 

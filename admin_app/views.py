@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.apps import apps
 from .context_processors import superuser_required
 from .forms import *
+from .filters import *
 
 @login_required(login_url="admin_app:login")
 @user_passes_test(superuser_required)
@@ -16,6 +17,7 @@ def admin_dashboard(request):
 
     selected_model_name=request.GET.get("model")
     selected_model_form = MODEL_FORM_MAP.get(selected_model_name)
+    model_filter_map = MODEL_FILTER_MAP.get(selected_model_name)
 
     model_class = selected_model_form()._meta.model
     in_list = model_class in ADD_OBJECT_LIST
@@ -30,13 +32,20 @@ def admin_dashboard(request):
     
     model_class = selected_model_form()._meta.model
     
-    model_objects = model_class.objects.all()
+    # model_objects = model_class.objects.all()
+
+    if model_filter_map:
+        model_filter = model_filter_map(request.GET, queryset=model_class.objects.all())
+        filtered_objects = model_filter.qs
+    else:
+        filtered_objects = model_class.objects.all()
 
     return render(request, 'admin_dashboard.html', {
         'model_name':model_name,
         'selected_model_field':form_field_names,
-        'selected_model_objects':model_objects,
-     })
+        'selected_model_objects':filtered_objects,
+        'filter':model_filter if model_filter_map else None,
+    })
 
 @login_required(login_url="admin_app:login")
 @user_passes_test(superuser_required)
