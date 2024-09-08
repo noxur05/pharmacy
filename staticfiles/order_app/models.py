@@ -9,7 +9,7 @@ from customer_app.models import *
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product, through='OrderItem')
-    date_ordered = models.DateTimeField(auto_now_add=True, null=True)
+    date_ordered = models.DateTimeField(null=True, blank=True)
     complete = models.BooleanField(default=False, null=True, blank=True)
     total_items_price = models.FloatField(null=True)
     total_price = models.FloatField(null=True)
@@ -30,9 +30,9 @@ class Order(models.Model):
         return total
 
     def save(self, *args, **kwargs):
-        if not self.id and not self.date_ordered:
+        if not self.id and not self.date_ordered and self.complete == True:
             self.date_ordered = timezone.now()
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)  
 
     def get_total_items_price(self):
         total = sum(item.get_total_item_price() for item in self.orderitems.all())
@@ -45,18 +45,19 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, related_name="orderitems" ,null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1, null=True)
-    date_added = models.DateTimeField(auto_now_add=True, null=True)
+    date_added = models.DateTimeField(null=True)
 
     def __str__(self):
-        return f"{self.product} - {self.order}"
+        return f"{self.product} - {self.date_added}"
     
     def get_total_item_price(self):
         return self.product.sale_price * self.quantity
     
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         if not self.id and not self.date_added:
             self.date_added = timezone.now()
-        super().save(*args, **kwargs)
+
 class ShippingRegion(models.Model):
     region_name = models.CharField(max_length=235)
 
@@ -77,9 +78,9 @@ class ShippingAddress(models.Model):
     customer_name = models.CharField(max_length=150, null=True)
     phone_number = models.CharField(max_length=50, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
-    region_name = models.ForeignKey(ShippingRegion, on_delete=models.SET_NULL, null=True )
+    region_name = models.ForeignKey(ShippingRegion, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=True)
-    date_added = models.DateTimeField(auto_now_add=True, null=True)
+    date_added = models.DateTimeField(null=True)
     payment_type = models.CharField(max_length=50, choices=PAYMENT_CHOICES, default=CASH, null=True)
     note = models.TextField(null=True, blank=True)
 

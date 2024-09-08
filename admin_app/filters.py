@@ -49,12 +49,13 @@ class ShippingAddressFilter(django_filters.FilterSet):
     customer_name=django_filters.CharFilter(lookup_expr='icontains')
     phone_number=django_filters.CharFilter(lookup_expr='icontains')
     address=django_filters.CharFilter(lookup_expr='icontains')
-    min_added=django_filters.DateFilter(field_name="date_added", lookup_expr="gte", label="From Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
-    max_added=django_filters.DateFilter(field_name="date_added", lookup_expr="lte", label="To Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
+    min_added = django_filters.DateFilter(field_name="date_added", lookup_expr="gte", label="From Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
+    max_added = django_filters.DateFilter(field_name="date_added", lookup_expr="lte", label="To Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
+
 
     region_name = django_filters.ModelChoiceFilter(
         queryset=ShippingRegion.objects.all(),
-        widget=forms.SelectMultiple
+        widget=forms.Select(attrs={"class":'form-control'})
     )
 
     def __init__(self, *args, **kwargs):
@@ -63,20 +64,37 @@ class ShippingAddressFilter(django_filters.FilterSet):
         self.filters['customer_name'].field.widget.attrs['class'] = 'form-control '
         self.filters['phone_number'].field.widget.attrs['class'] = 'form-control '
         self.filters['address'].field.widget.attrs['class'] = 'form-control'
-        self.filters['max_added'].field.widget.attrs['class'] = 'form-control'
-        self.filters['min_added'].field.widget.attrs['class'] = 'form-control'
-        self.filters['region_name'].field.widget.attrs['class'] = 'form-control'
-        self.filters['date_added'].field.widget.attrs['class'] = 'form-control'
+        # self.filters['max_added'].field.widget.attrs['class'] = 'form-control'
+        # self.filters['min_added'].field.widget.attrs['class'] = 'form-control'
+        # self.filters['region_name'].field.widget.attrs['class'] = 'form-control'
+        # self.filters['date_added'].field.widget.attrs['class'] = 'form-control'
 
     class Meta:
         model=ShippingAddress
-        fields = ("customer_name", "phone_number", "address", "region_name", "date_added",)
-        widgets = {
-            'date_added': forms.DateInput(attrs={'type': 'datetime-local'}),
-        #     'max_added': forms.DateInput(attrs={'type': 'datetime-local'})
-        }
+        fields = ("customer_name", "phone_number", "address", "region_name",)
+        # widgets = {
+        #     'date_added': forms.DateInput(attrs={'type': 'datetime-local'}),
+        # #     'max_added': forms.DateInput(attrs={'type': 'datetime-local'})
+        # }
+    
+class OrderItemFilter(django_filters.FilterSet):
+    product = django_filters.CharFilter(field_name='product__product_name', lookup_expr='icontains', label="Product Name")
+    quantity = django_filters.NumberFilter(lookup_expr='exact')
+    min_added = django_filters.DateFilter(field_name="date_added", lookup_expr="gte", label="From Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
+    max_added = django_filters.DateFilter(field_name="date_added", lookup_expr="lte", label="To Date", widget=forms.DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'}))
+
+    class Meta:
+        model = OrderItem
+        fields = ['product', 'quantity']
+
+    def __init__(self, *args, **kwargs):
+        super(OrderItemFilter, self).__init__(*args, **kwargs)
+
+        self.filters['product'].field.widget.attrs['class'] = 'form-control '
+        self.filters['quantity'].field.widget.attrs['class'] = 'form-control'
 
 MODEL_FILTER_MAP = {
     'Product':ProductFilter,
     'ShippingAddress':ShippingAddressFilter,
+    'OrderItem':OrderItemFilter,
 }

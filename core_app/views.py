@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.conf.urls import handler404, handler500, handler403
 from django.db.models import Exists, OuterRef, Prefetch
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseForbidden, HttpResponseServerError
 from django.views import View
 from django.utils import timezone
 
@@ -76,4 +77,28 @@ def search_pill(request):
                 product.in_cart = order.products.filter(id=product.id).exists()
                 product.in_like = user_like.products.filter(id=product.id).exists()
     return render(request, 'search_pill.html', {'search_products':results})
+
+
+
+def custom_404_view(request, exception):
+    return render(request, "errors/404.html", status=404)
+
+def custom_403_view(request, exception):
+    return render(request, "errors/403.html", status=403)
+
+def custom_500_view(request):
+    return render(request, "errors/500.html", status=500)
+
+def restricted_view(request):
+    return HttpResponseForbidden()
+
+def server_error_view(request):
+    raise Exception("This is a test exception")
+
+
+# Assigning the custom views to handlers
+handler404 = custom_404_view
+handler403 = custom_403_view
+handler500 = custom_500_view
+
 # Create your views here.

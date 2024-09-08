@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zg)u@#xh_8rf0@%*8xqjt+-&hj-ew^q)gaf+03y+k23ovwoy0s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,12 +46,19 @@ INSTALLED_APPS = [
     'product_app',
     'like_app',
     'ads_app',
-    'admin_app'
+    'admin_app',
+
+    'django_filters',
+    # 'rosetta',
+    # 'parler'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    # 'django.middleware.locale.LocaleMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -117,6 +125,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+# LANGUAGES = [
+#     ('en', _('English')),
+#     ('ru', _('Russian')),
+#     ('tm', _('Turkmen'))
+# ]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -130,6 +144,22 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# LOCALE_PATHS = [
+#     os.path.join(BASE_DIR, 'locale')
+# ]
+
+# PARLER_LANGUAGES = {
+#     None:(
+#         {'code':'en',},
+#         {'code':'ru',},
+#         {'code':'tm',},
+#     ),
+#     'default':{
+#         'fallbacks':['en'],
+#         'hide_unstranslated':False,
+#     }
+# }
 
 
 # Default primary key field type

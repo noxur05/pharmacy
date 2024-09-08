@@ -1,10 +1,11 @@
 from django.contrib import admin
+from parler.admin import TranslatableAdmin
 from .models import *
 
 class AdvertisementImageInline(admin.TabularInline):
     model = AdvertisementImage
 
-class AdvertisementAdmin(admin.ModelAdmin):
+class AdvertisementAdmin(TranslatableAdmin):
     inlines = [
         AdvertisementImageInline
     ]

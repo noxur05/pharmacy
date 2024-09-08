@@ -32,4 +32,19 @@ def product(request):
             status = 'saved'
     categories = ProductCategory.objects.all().prefetch_related('products')
     return JsonResponse({'total_quantity':order.get_total_quantity(), 'status':status})
+
+def profile(request):
+    if request.method == 'GET':
+        obj_id = request.GET.get('product')
+        product = Product.objects.get(id=obj_id)
+        categories = product.category_name.all()
+        images = product.images.all()
+        customer = get_customer(request)
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        user_like, created = Like.objects.get_or_create(customer=customer)
+        for category in categories:
+            for product in category.products.all():
+                product.in_cart = order.products.filter(id=product.id).exists()
+                product.in_like = user_like.products.filter(id=product.id).exists()
+    return render(request, 'product_profile.html', {"product_cat":categories, 'images':images, "product":product})
 # Create your views here.

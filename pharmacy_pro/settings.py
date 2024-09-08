@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+# from django.utils.translation import gettext_lazy as _
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,12 +48,18 @@ INSTALLED_APPS = [
     'ads_app',
     'admin_app',
 
-    'django_filters'
+    'django_filters',
+    # 'rosetta',
+    # 'parler'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    # 'django.middleware.locale.LocaleMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,6 +126,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+# LANGUAGES = [
+#     ('en', _('English')),
+#     ('ru', _('Russian')),
+#     ('tm', _('Turkmen'))
+# ]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -129,9 +142,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = (BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# LOCALE_PATHS = [
+#     os.path.join(BASE_DIR, 'locale')
+# ]
+
+# PARLER_LANGUAGES = {
+#     None:(
+#         {'code':'en',},
+#         {'code':'ru',},
+#         {'code':'tm',},
+#     ),
+#     'default':{
+#         'fallbacks':['en'],
+#         'hide_unstranslated':False,
+#     }
+# }
 
 
 # Default primary key field type

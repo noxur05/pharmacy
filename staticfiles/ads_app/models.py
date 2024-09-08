@@ -1,14 +1,18 @@
 from django.db import models
 from django.db.models.signals import pre_delete, pre_save, post_save
+from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 from django.utils import timezone
+
+from parler.models import TranslatableModel, TranslatedFields
 
 from PIL import Image
 import os
 import io
+
 class Advertisement(models.Model):
-    title = models.CharField(max_length=255, null=True)
-    description = models.TextField(null=True)
+    title = models.CharField(_('title'), max_length=255, null=True)
+    description = models.TextField(_('description'), null=True)
     url = models.URLField(max_length=200, null=True)
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
@@ -16,7 +20,7 @@ class Advertisement(models.Model):
     is_brand = models.BooleanField(default=False, null=True)
 
     def __str__(self):
-        return self.title
+        return self.safe_translation_getter('title', default='')
 
     def is_current(self):
         now = timezone.now()

@@ -1,20 +1,4 @@
-.bg-image {
-    background-image: url("../img/home-bg-slideshow.jpg");
-    background-color: #000000;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-}
 
-.bg-image2 {
-    background-image: url("../img/testimonial-bg.jpg");
-    background-color: #000000;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-}
 
 .bg-black-50 {
     background-color: rgba(0, 0, 0, 0.5);

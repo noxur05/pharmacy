@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 
 urlpatterns = [
     path('dolandyryjy/', admin.site.urls),
+    # path('rosetta/', include('rosetta.urls')),
     path('', include('core_app.urls')),
     path('customer/', include('customer_app.urls', namespace="customer_app")),
     path('order/', include('order_app.urls', namespace="order_app")),
