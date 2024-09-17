@@ -99,19 +99,24 @@
               </button>
               <form action="{% url 'set_language' %}" method="POST" id="languageForm">
                 {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.path }}">
-                <input type="hidden" name="query_params" id="queryParams">
+                <input name="next" type="hidden" value="" id="nextUrl">
+                {% comment %} <input type="hidden" name="query_params" id="queryParams"> {% endcomment %}
                 <input type="hidden" name="language" id="languageInput">
                 <div class="dropdown-menu dropdown-menu-lg-end p-1 p-md-2 w-100">
                   <div class="row row-cols-1 fw-normal">
                     <div class="col">
-                      <button class="changeLanguage dropdown-item" value="tm" {% if LANGUAGE_CODE == 'tm' %}selected{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Turkmen</button>
+                      <button  value="tm" 
+                      {% if LANGUAGE_CODE == 'tm' %}
+                        class="changeLanguage dropdown-item"
+                      {% else %}
+                        class="changeLanguage dropdown-item"
+                      {% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Turkmen</button>
                     </div>
                     <div class="col">
-                      <button class="changeLanguage dropdown-item" value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> English</button>
+                      <button class="changeLanguage dropdown-item" value="en" {% if LANGUAGE_CODE == 'en' %}disabled{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> English</button>
                     </div>
                     <div class="col">
-                      <button class="changeLanguage dropdown-item" value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Russian</button>
+                      <button class="changeLanguage dropdown-item" value="ru" {% if LANGUAGE_CODE == 'ru' %}disabled{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Russian</button>
                     </div>
                   </div>
                 </div>

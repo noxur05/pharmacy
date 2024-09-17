@@ -3,6 +3,7 @@ from django.conf.urls import handler404, handler500, handler403
 from django.db.models import Exists, OuterRef, Prefetch
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponseServerError
 from django.utils.translation import activate
+from django.utils import translation
 from django.conf import settings
 from django.views import View
 from django.utils import timezone
@@ -17,24 +18,23 @@ from customer_app.views import get_customer
 from django.utils import timezone
 from urllib.parse import urlencode
 
-# def set_language(request):
-#     if request.method == 'POST':
-#         language = request.POST.get("language", settings.LANGUAGE_CODE)
-#         next_url = request.POST.get("next", '/')
-#         query_params = request.POST.get("query_params", "")
-        
-#         activate(language)
-#         request.session[settings.LANGUAGE_COOKIE_NAME] = language
-
-#         # Construct the URL with query parameters
-#         if query_params:
-#             full_url = f"{next_url}?{query_params}"
-#         else:
-#             full_url = next_url
-
-#         return HttpResponseRedirect(full_url)
-
-#     return HttpResponseRedirect(f'/{language}/')
+def custom_set_language(request):
+    if request.method == 'POST':
+        language = request.POST.get('language', settings.LANGUAGE_CODE)
+        next_url = request.POST.get('next', '/')
+        query_params = request.POST.get('query_params', '')
+        settings.LANGUAGE_CODE = language
+        print(settings.LANGUAGE_CODE)
+        print(language, 'Language')
+        activate(language)
+        request.session[settings.LANGUAGE_COOKIE_NAME] = language
+        request.session['django_language'] = language
+        if query_params:
+            full_url = f"{next_url}?{query_params}"
+        else:
+            full_url = next_url
+        return HttpResponseRedirect(full_url)
+    return HttpResponseRedirect('/')
 
 
 def home(request):

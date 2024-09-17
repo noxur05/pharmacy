@@ -100,12 +100,10 @@ $(document).ready(function() {
 
         languageInput.val($(this).val());
 
-        // let queryParams = new URLSearchParams(window.location.search).toString();
-        // queryParamsInput.val(queryParams);
+        let queryParams = new URLSearchParams(window.location.search).toString();
+        $('#nextUrl').val(queryParams);
         $('#languageForm').submit();
     });
-
-
 
     if ($('.customBodyCart').length > 0) {
         $('.customBodyCart').last().removeClass('border-bottom');
