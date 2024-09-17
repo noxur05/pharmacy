@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 00:48+0500\n"
+"POT-Creation-Date: 2024-09-16 21:30+0500\n"
 "PO-Revision-Date: 2024-09-09 00:49+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: .\ads_app\models.py:11
+#: .\ads_app\models.py:14
 msgid "title"
 msgstr "заголовок"
 
-#: .\ads_app\models.py:12
+#: .\ads_app\models.py:15
 msgid "description"
 msgstr "описание"
 
-#: .\pharmacy_pro\settings.py:128
+#: .\pharmacy_pro\settings.py:130
 msgid "English"
 msgstr "английский"
 
-#: .\pharmacy_pro\settings.py:129
+#: .\pharmacy_pro\settings.py:131
 msgid "Russian"
 msgstr "русский"
 
-#: .\pharmacy_pro\settings.py:130
+#: .\pharmacy_pro\settings.py:132
 msgid "Turkmen"
 msgstr "туркменский"

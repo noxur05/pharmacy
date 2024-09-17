@@ -21,8 +21,12 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+
+urlpatterns += i18n_patterns(
     path('dolandyryjy/', admin.site.urls),
-    # path('rosetta/', include('rosetta.urls')),
     path('', include('core_app.urls')),
     path('customer/', include('customer_app.urls', namespace="customer_app")),
     path('order/', include('order_app.urls', namespace="order_app")),
@@ -30,7 +34,7 @@ urlpatterns = [
     path('like/', include('like_app.urls', namespace="like_app")),
     path('ads/', include('ads_app.urls', namespace="ads_app")),
     path('admin/', include('admin_app.urls', namespace="admin_app")),
-]
+)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

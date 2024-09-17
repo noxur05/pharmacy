@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 00:48+0500\n"
+"POT-Creation-Date: 2024-09-16 21:30+0500\n"
 "PO-Revision-Date: 2024-09-09 00:50+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,22 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: .\ads_app\models.py:11
+#: .\staticfiles\ads_app\models.py:14
 msgid "title"
 msgstr "title"
 
-#: .\ads_app\models.py:12
+#: .\staticfiles\ads_app\models.py:15
 msgid "description"
 msgstr "description"
 
-#: .\pharmacy_pro\settings.py:128
-msgid "English"
-msgstr "english"
+#~ msgid "English"
+#~ msgstr "english"
 
-#: .\pharmacy_pro\settings.py:129
-msgid "Russian"
-msgstr "russian"
+#~ msgid "Russian"
+#~ msgstr "russian"
 
-#: .\pharmacy_pro\settings.py:130
-msgid "Turkmen"
-msgstr "turkmen"
+#~ msgid "Turkmen"
+#~ msgstr "turkmen"

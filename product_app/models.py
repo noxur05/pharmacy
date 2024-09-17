@@ -6,6 +6,7 @@ from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.utils.translation import get_language
 
 from PIL import Image
 import os
@@ -13,14 +14,26 @@ import io
 
 class ProductCategory(models.Model):
     category_name = models.CharField(max_length=150, null=True)
+    category_name_ru = models.CharField(max_length=150, null=True)
+    category_name_tm = models.CharField(max_length=150, null=True)
 
     def __str__(self):
+        return self.category_name
+    
+    def get_translated_name(self):
+        current_language = get_language()
+        if current_language == "tm":
+            return self.category_name_tm
+        if current_language == "ru":
+            return self.category_name_ru
         return self.category_name
     
 class Product(models.Model):
     category_name = models.ManyToManyField(ProductCategory, related_name="products")
     product_name = models.CharField(null=True, max_length=100)
     product_description = models.TextField(null=True)
+    product_description_ru = models.TextField(null=True)
+    product_description_tm = models.TextField(null=True)
     original_price = models.FloatField(null=True)
     sale_price = models.FloatField(null=True)
     stock = models.PositiveIntegerField(null=True, blank=True)
@@ -28,6 +41,13 @@ class Product(models.Model):
     def __str__(self):
         categories = ', '.join([category.category_name for category in self.category_name.all()])
         return f"{self.product_name} ({categories})"
+    def get_translated_name(self):
+        current_language = get_language()
+        if current_language == "tm":
+            return self.product_description_tm
+        if current_language == "ru":
+            return self.product_description_ru
+        return self.product_description
 
 
         

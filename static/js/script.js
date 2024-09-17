@@ -86,12 +86,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     $('select option:first').attr('selected', 'selected')
 });
+
 $(window).on("ready load resize", function () {
     $("#pageBody").css({"margin-bottom": -$("#pageFooter").height()});
     $("#pagePush").css({"height": $("#pageFooter").height()});
 });
 
 $(document).ready(function() {
+
+    $('.changeLanguage').click(function(){
+        let languageInput = $('#languageInput');
+        // let queryParamsInput = $('#queryParams');
+
+        languageInput.val($(this).val());
+
+        // let queryParams = new URLSearchParams(window.location.search).toString();
+        // queryParamsInput.val(queryParams);
+        $('#languageForm').submit();
+    });
+
+
+
     if ($('.customBodyCart').length > 0) {
         $('.customBodyCart').last().removeClass('border-bottom');
         $('#openForm').removeClass('disabled')
@@ -197,7 +212,7 @@ $(document).ready(function() {
         console.log(button.val());
         $.ajax({
             type: 'POST',
-            url: '/order/order-remove/',  // Replace with your view's URL
+            url: '/order/order-remove/',
             data: {
                 'data': button.val(),
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
@@ -328,7 +343,7 @@ $(document).ready(function() {
         });
     } 
     async function fetchLocation() {
-        const apiKey = 'bf083b4024dd444eb646a422b0a8c2a7';  // Replace with your ipgeolocation.io API key
+        const apiKey = 'bf083b4024dd444eb646a422b0a8c2a7';
         const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}`);
         const data = await response.json();
         
@@ -349,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let truncateElements = document.querySelectorAll('.truncate-text');
     truncateElements.forEach(function (element) {
       let lineHeight = parseFloat(window.getComputedStyle(element).lineHeight);
-      let maxHeight = lineHeight * 2; // Adjust to match the number of lines specified
+      let maxHeight = lineHeight * 2;
       if (element.offsetHeight > maxHeight) {
         while (element.offsetHeight > maxHeight) {
           element.textContent = element.textContent.replace(/\W*\s(\S)*$/, '...');
