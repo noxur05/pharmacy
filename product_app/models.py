@@ -20,17 +20,22 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.category_name
     
-    def get_translated_name(self):
+    def get_translated_category(self):
         current_language = get_language()
         if current_language == "tm":
             return self.category_name_tm
         if current_language == "ru":
             return self.category_name_ru
+        else:
+            return self.category_name
         return self.category_name
     
 class Product(models.Model):
     category_name = models.ManyToManyField(ProductCategory, related_name="products")
     product_name = models.CharField(null=True, max_length=100)
+    product_name_ru = models.CharField(null=True, max_length=100)
+    product_name_tm = models.CharField(null=True, max_length=100)
+
     product_description = models.TextField(null=True)
     product_description_ru = models.TextField(null=True)
     product_description_tm = models.TextField(null=True)
@@ -41,13 +46,22 @@ class Product(models.Model):
     def __str__(self):
         categories = ', '.join([category.category_name for category in self.category_name.all()])
         return f"{self.product_name} ({categories})"
-    def get_translated_name(self):
+
+    def get_translated_description(self):
         current_language = get_language()
         if current_language == "tm":
             return self.product_description_tm
         if current_language == "ru":
             return self.product_description_ru
         return self.product_description
+
+    def get_translated_name(self):
+        current_language = get_language()
+        if current_language == "tm":
+            return self.product_name_tm
+        if current_language == "ru":
+            return self.product_name_ru
+        return self.product_name
 
 
         

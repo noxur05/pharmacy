@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf.urls import handler404, handler500, handler403
-from django.db.models import Exists, OuterRef, Prefetch
+from django.db.models import Exists, OuterRef, Prefetch, Q
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponseServerError
 from django.utils.translation import activate
 from django.utils import translation
@@ -48,9 +48,13 @@ def home(request):
     liked_product_ids = set(user_like.products.values_list('id', flat=True))
     
     for category in categories:
+        category.name = category.get_translated_category()
         for product in category.products.all():
             product.in_cart = product.id in cart_product_ids
             product.in_like = product.id in liked_product_ids
+            product.name = product.get_translated_name()
+            product.description = product.get_translated_description()
+            print(product.name, product.description)
     ads = Advertisement.objects.filter(end_date__gt=timezone.now(), is_brand=False).prefetch_related('images')
     ads_list = []
     active_ad_ids = set()

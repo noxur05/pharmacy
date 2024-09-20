@@ -96,12 +96,11 @@ $(document).ready(function() {
 
     $('.changeLanguage').click(function(){
         let languageInput = $('#languageInput');
-        // let queryParamsInput = $('#queryParams');
-
         languageInput.val($(this).val());
 
-        let queryParams = new URLSearchParams(window.location.search).toString();
-        $('#nextUrl').val(queryParams);
+        // let queryParams = new URLSearchParams(window.location.search).toString();
+        // console.log(queryParams);
+        // $('#nextUrl').val(queryParams);
         $('#languageForm').submit();
     });
 

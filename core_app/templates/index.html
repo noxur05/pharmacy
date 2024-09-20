@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Bash Sahypa
+  {% trans "Home" %}
 {% endblock title %}
 
 {% block links_and_css %}
@@ -33,7 +34,7 @@
         aria-label="Splide Basic HTML Example">
         <div class="h4">
           <a class="d-flex justify-content-between w-100 link-dark text-decoration-none" href="{% url "product_app:custom-pills" category.id %}">
-            {{category.category_name}}
+            {{category.name}}
             <span class=""><i class="bi bi-arrow-right"></i></span>
           </a>
         </div>
@@ -45,12 +46,12 @@
                 <div
                   class="position-relative goods-size overflow-hidden rounded-2 bg-white shadow-sm border img-hover mb-2">
                   {% for image in product.images.all %}
-                  <a href="{% url "product_app:profile" %}?product={{product.id}}">
+                  <a href="{% url "product_app:profile" product.id %}">
                     <img class="w-100 h-100 pe-0 z-0" src="{{image.image.url}}" alt="">
                   </a>
                   <div class="position-absolute top-0 end-0 z-1 m-1">
                     <a href="{{image.image.url}}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden custom-fancybox"
-                      data-fancybox data-caption="{{product.product_name}} - {{product.product_description}}">
+                      data-fancybox data-caption="{{product.name}} - {{product.description}}">
                       <i class="bi-zoom-in"></i>
                     </a>
                   </div>
@@ -83,18 +84,18 @@
                           <i class="bi-basket"></i>
                             <span>
                             {% if product.in_cart %}
-                              Ayyr
+                              {% trans "Remove" %}
                             {% else %}
-                              Gosh
+                              {% trans "Add" %}
                             {% endif %}
                             </span>
                         </button>
                       </form>
                     </div>
                   </div>
-                  <div class="color-11 fw-bold truncate-text">{{product.product_name}}</div>
+                  <div class="color-11 fw-bold truncate-text">{{product.name}}</div>
                   <div class="fw-normal text-truncate small ">
-                    {{product.product_description}}
+                    {{product.description}}
                   </div>
                 </div>
               </div>

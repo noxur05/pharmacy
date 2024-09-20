@@ -27,7 +27,7 @@
       <div class="w-100 d-lg-none">
         <form method="GET" action="{% url "search-pill" %}">
           <div class="btn btn-md bg-light btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
-            <input class="searchInput bg-transparent border-0 w-100 me-4 " name="searchInput" type="search" placeholder="Gozle...">
+            <input class="searchInput bg-transparent border-0 w-100 me-4 " name="searchInput" type="search" placeholder="{% trans "Search" %}...">
             <div class="position-absolute end-0 me-3">
               {% csrf_token %}
               <button class="searchButton border-0 bg-transparent" type="submit">
@@ -44,7 +44,7 @@
               <form method="GET" action="{% url "search-pill" %}">
                 {% csrf_token %}
                 <div class="btn btn-md bg-light btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
-                  <input class="border-0 w-100 bg-transparent me-5" name="searchInput" type="search" placeholder="Gozle...">
+                  <input class="border-0 w-100 bg-transparent me-5" name="searchInput" type="search" placeholder="{% trans "Search" %}...">
                   <div class="position-absolute end-0 me-3">
                     <button class="border-0 bg-transparent" type="submit">
                       <i class="bi-search color-11"></i>
@@ -56,28 +56,28 @@
             <div class="pt-1">
               <ul class="navbar-nav col-12 text-lg-center fw-bold">
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="/">Bash Sahypa</a>
+                  <a class="nav-link color-11 p-0" href="/">{% trans "Home" %}</a>
                 </li>
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="{% url "like_app:favorite" %}">Halanlarym</a>
+                  <a class="nav-link color-11 p-0" href="{% url "like_app:favorite" %}">{% trans "Wishlist" %}</a>
                 </li>
                 <li class="nav-item col-12 col-lg dropdown position-static">
-                  <a class="nav-link color-11 p-0 dropdown-toggle" data-bs-toggle="dropdown" href="#">Kategoriyalar</a>
+                  <a class="nav-link color-11 p-0 dropdown-toggle" data-bs-toggle="dropdown" href="#">{% trans "Categories" %}</a>
                   <div class="dropdown-menu w-100 p-1 ps-2">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 fw-normal">
                       {% for category in all_categories  %}
                       <div class="col">
-                        <a class="dropdown-item" href="{% url "product_app:custom-pills" category.id %}">{{category.category_name}}</a>
+                        <a class="dropdown-item" href="{% url "product_app:custom-pills" category.id %}">{{category.name}}</a>
                       </div>
                       {% endfor %}
                     </div>
                   </div>
                 </li>
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="#">Habarlashmak</a>
+                  <a class="nav-link color-11 p-0" href="#">{% trans "Contact" %}</a>
                 </li>
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="#">Biz Barada</a>
+                  <a class="nav-link color-11 p-0" href="#">{% trans "About Us" %}</a>
                 </li>
               </ul>
             </div>
@@ -99,24 +99,24 @@
               </button>
               <form action="{% url 'set_language' %}" method="POST" id="languageForm">
                 {% csrf_token %}
-                <input name="next" type="hidden" value="" id="nextUrl">
-                {% comment %} <input type="hidden" name="query_params" id="queryParams"> {% endcomment %}
+                <input name="next" type="hidden" value="{{ request.path }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">
                 <input type="hidden" name="language" id="languageInput">
                 <div class="dropdown-menu dropdown-menu-lg-end p-1 p-md-2 w-100">
                   <div class="row row-cols-1 fw-normal">
                     <div class="col">
-                      <button  value="tm" 
-                      {% if LANGUAGE_CODE == 'tm' %}
-                        class="changeLanguage dropdown-item"
-                      {% else %}
-                        class="changeLanguage dropdown-item"
-                      {% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Turkmen</button>
+                      <button class="changeLanguage dropdown-item" value="tm" {% if LANGUAGE_CODE == 'tm' %}disabled{% endif %} type="button">
+                        <img src="{% static "media/flags/tkm.png" %}" alt=""> {% trans "Turkmen" %}
+                      </button>
                     </div>
                     <div class="col">
-                      <button class="changeLanguage dropdown-item" value="en" {% if LANGUAGE_CODE == 'en' %}disabled{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> English</button>
+                      <button class="changeLanguage dropdown-item" value="en" {% if LANGUAGE_CODE == 'en' %}disabled{% endif %} type="button">
+                       <img src="{% static "media/flags/eng.png" %}" alt=""> {% trans "English" %}
+                      </button>
                     </div>
                     <div class="col">
-                      <button class="changeLanguage dropdown-item" value="ru" {% if LANGUAGE_CODE == 'ru' %}disabled{% endif %} type="button"><img src="img/flags/tkm.png" alt=""> Russian</button>
+                      <button class="changeLanguage dropdown-item" value="ru" {% if LANGUAGE_CODE == 'ru' %}disabled{% endif %} type="button">
+                        <img src="{% static "media/flags/rus.png" %}" alt=""> {% trans "Russian" %}
+                      </button>
                     </div>
                   </div>
                 </div>

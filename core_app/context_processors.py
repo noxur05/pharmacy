@@ -8,5 +8,7 @@ def global_context(request):
     customer = get_customer(request)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     categories = ProductCategory.objects.all()
+    for category in categories:
+        category.name = category.get_translated_category()
 
     return {'total_quantity': order.get_total_quantity() if order else 0, 'all_categories':categories}

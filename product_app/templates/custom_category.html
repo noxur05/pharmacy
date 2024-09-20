@@ -12,7 +12,7 @@ Special Category
     <div class="container-xxl">
       {% for category in spec_categories %}
       <div class="h4">
-        {{ category.category_name }}
+        {{ category.name}}
       </div>
       <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
         {% for product in category.products.all %}
@@ -23,7 +23,7 @@ Special Category
             <img class="w-100 h-100 pe-0 z-0" src="{{ image.image.url }}" alt="">
             <div class="position-absolute top-0 end-0 z-1 m-1">
               <a href="{{ image.image.url }}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden custom-fancybox"
-                data-fancybox data-caption="{{ product.product_name }} - {{ product.product_description }}">
+                data-fancybox data-caption="{{ product.name }} - {{ product.description }}">
                 <i class="bi bi-zoom-in"></i>
               </a>
             </div>
@@ -67,9 +67,9 @@ Special Category
                 </form>
               </div>
             </div>
-            <div class="color-11 fw-bold truncate-text">{{ product.product_name }}</div>
-            <div class="fw-normal truncate-text small h6 fw-normal">
-              {{ product.product_description }}
+            <div class="color-11 fw-bold truncate-text">{{ product.name }}</div>
+            <div class="fw-normal text-truncate small h6 fw-normal">
+              {{ product.description }}
             </div>
           </div>
         </div>

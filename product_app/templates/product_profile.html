@@ -16,13 +16,13 @@
             <div class="fw-bold text-secondary">Category:
                 {% for category in product_cat %}
                 <span class="fw-normal text-dark">
-                    {{category.category_name }}
+                    {{category }}
                 </span>
                 {% endfor %}
             </div>
             <div class="fw-bold text-secondary">Name:
                 <span class="fw-normal text-dark">
-                    {{product.product_name}}
+                    {{product.name}}
                 </span>
             </div>
             <div class="fw-bold text-secondary">Price:
@@ -37,7 +37,7 @@
             </div>
             <div class="fw-bold text-secondary">Description:
                 <span class="fw-normal text-dark">
-                    {{product.product_description}}
+                    {{product.description}}
                 </span>
             </div>
             <div class="mt-3">
