@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
 Special Category
@@ -58,9 +59,9 @@ Special Category
                     <i class="bi-basket"></i>
                     <span>
                       {% if product.in_cart %}
-                        Ayyr
+                        {% trans "Remove" %}
                       {% else %}
-                        Gosh
+                        {% trans "Add" %}
                       {% endif %}
                     </span>
                   </button>

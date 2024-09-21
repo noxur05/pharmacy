@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from customer_app.views import get_customer
+from product_app.models import ProductCategory, Product
 from order_app.models import Order
 
 def like_product(request):
@@ -30,5 +31,7 @@ def favorite(request):
     for product in results:
             product.in_cart = order.products.filter(id=product.id).exists()
             product.in_like = user_like.products.filter(id=product.id).exists()
+            product.name = product.get_translated_name()
+            product.description = product.get_translated_description()
     return render(request, 'search_pill.html', {'search_products':results})
 # Create your views here.

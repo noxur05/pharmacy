@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
   
@@ -15,13 +16,13 @@
         <div class="d-flex justify-content-between">
           <div class="">
             <div class="h3 fw-bold color-11">
-              Sebet
+              {% trans "Basket" %}
             </div>
           </div>
           <div class="">
             <div>
               <button class="orderRemove btn btn-outline-success py-1 mb-1" value="{{order_id}}">
-                <i class="bi-trash"></i> Arassala
+                <i class="bi-trash"></i> {% trans "Clear" %}
               </button>
             </div>
           </div>
@@ -41,9 +42,9 @@
                 <div class="row h-100 align-items-center">
                   <div class="col-12 col-lg-8">
                     <div class="h5 fw-bold mb-3 mt-4 mt-lg-0">
-                      {{item.product.product_name}}
+                      {{item.product.name}}
                     </div>
-                    <div class="small truncate-text">{{item.product.product_description}}</div>
+                    <div class="small text-truncate">{{item.product.description}}</div>
                   </div>
                   <div class="col-12 col-lg-4">
                     <div class="row row-cols-2 row-cols-lg-1 w-100 g-1 mt-2">
@@ -96,14 +97,14 @@
             <div class="col">
               <div class="d-flex w-100 justify-content-between border-bottom">
                 <div class="fw-normal h4">
-                  Sebet:
+                  {% trans "Basket" %}:
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="d-flex w-100 justify-content-between">
                 <div class="fw-normal h5">
-                  Baha:
+                  {% trans "Price" %}:
                 </div>
                 <div class="fw-bold color-11">
                   <span class="totalItemsPrice">{{total_items_price| floatformat:2}}</span>  TMT
@@ -113,7 +114,7 @@
             <div class="col ">
               <div class="d-flex w-100 justify-content-between border-bottom">
                 <div class="fw-normal h5">
-                  Eltip Berme:
+                  {% trans "Delivery" %}:
                 </div>
                 <div class="fw-bold color-11">
                   <span>{{shipping_price| floatformat:2}}</span> TMT
@@ -123,7 +124,7 @@
             <div class="col">
               <div class="d-flex w-100 justify-content-between">
                 <div class="fw-normal h5">
-                  Jemi:
+                  {% trans "Total price" %}:
                 </div>
                 <div class="fw-bold color-11">
                   <span class="totalPrice">{{total_price| floatformat:2}}</span> TMT
@@ -132,7 +133,7 @@
             </div>
             <div class="col">
               <div class="">
-                <button class="btn btn-outline-danger w-100 fw-bold" id="openForm" data-bs-toggle="modal" data-bs-target="#shippingForm">Sargyt Etmek</button>
+                <button class="btn btn-outline-danger w-100 fw-bold" id="openForm" data-bs-toggle="modal" data-bs-target="#shippingForm">{% trans "Order" %}</button>
               </div>
             </div>
           </div>
@@ -143,23 +144,23 @@
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Sargyt Maglumatlary</h5>
+            <h5 class="modal-title">{% trans "Order Information" %}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="fullName" class="form-label">Ady</label>
+              <label for="fullName" class="form-label">{% trans "Name" %}</label>
               <input type="email" class="form-control" id="fullName">
             </div>
             <div class="mb-3">
-              <label for="phoneNumber" class="form-label">Telefon Belgi</label>
+              <label for="phoneNumber" class="form-label">{% trans "Phone Number" %}</label>
               <div class="input-group">
                 <span class="input-group-text" id="basic-addon3">+993</span>
                 <input type="text" class="form-control" id="phoneNumber" aria-describedby="basic-addon3 basic-addon4">
               </div>
             </div>
             <div class="mb-3">
-              <label for="" class="form-label">Sebit</label>
+              <label for="" class="form-label">{% trans "Region" %}</label>
               <div class="input-group">
                 <select class="form-select" id="regionName">
                   {% for region in shipping_regions %}
@@ -169,31 +170,31 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="shippingStreet" class="form-label">Salgy</label>
+              <label for="shippingStreet" class="form-label">{% trans "Address" %}</label>
               <input type="email" class="form-control" id="shippingStreet" placeholder="koce/jay/otag">
             </div>
             <div class="mb-3">
-              <label for="shippingNote" class="form-label">Bellik</label>
+              <label for="shippingNote" class="form-label">{% trans "Note" %}</label>
               <textarea class="form-control" id="shippingNote" rows="3" placeholder="Hacan getirmelidigini bellik edin"></textarea>
             </div>
-            <label for="" class="form-label">Toleg Usuly</label>
+            <label for="" class="form-label">{% trans "Payment Method" %}</label>
             <div class="row row-cols-2 mb-3 mx-1">
               <div class="col form-check">
                 <input class="form-check-input" type="radio" name="toleg" id="nagtToleg" value="cash" checked>
                 <label class="form-check-label" for="nagtToleg">
-                  Nagt Toleg
+                  {% trans "Cash Payment" %}
                 </label>
               </div>
               <div class="col form-check">
                 <input class="form-check-input" type="radio" name="toleg" id="kartToleg" value="card">
                 <label class="form-check-label" for="kartToleg">
-                  Bank Karty
+                  {% trans "Bank Card" %}
                 </label>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="confirmShipping btn btn-outline-primary">Tassyklamak</button>
+            <button type="button" class="confirmShipping btn btn-outline-primary">{% trans "Confirm" %}</button>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}Profile{% endblock title %}
 
@@ -12,30 +13,30 @@
             <img class="w-100 h-100" src="{{image.image.url}}">
             {% endfor %}
         </div>
-        <div class="col-12 col-md-8">
-            <div class="fw-bold text-secondary">Category:
+        <div class="col-12 col-md-8 fw-bold text-secondary">
+            <div class="">{% trans "Categories" %}:
                 {% for category in product_cat %}
                 <span class="fw-normal text-dark">
                     {{category }}
                 </span>
                 {% endfor %}
             </div>
-            <div class="fw-bold text-secondary">Name:
+            <div class="">{% trans "Name" %}:
                 <span class="fw-normal text-dark">
                     {{product.name}}
                 </span>
             </div>
-            <div class="fw-bold text-secondary">Price:
+            <div class="">{% trans "Price" %}:
                 <span class="fw-normal text-dark">
                     {{product.sale_price}} TMT
                 </span>
             </div>
-            <div class="fw-bold text-secondary">Stock:
+            <div class="">{% trans "Stock" %}:
                 <span class="fw-normal text-dark">
                     {{product.stock}}
                 </span>
             </div>
-            <div class="fw-bold text-secondary">Description:
+            <div class="">{% trans "description" %}:
                 <span class="fw-normal text-dark">
                     {{product.description}}
                 </span>
@@ -66,9 +67,9 @@
                         <i class="bi-basket"></i>
                         <span>
                           {% if product.in_cart %}
-                            Ayyr
+                            {% trans "Remove" %}
                           {% else %}
-                            Gosh
+                            {% trans "Add" %}
                           {% endif %}
                         </span>
                       </button>

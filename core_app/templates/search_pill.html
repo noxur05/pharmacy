@@ -58,18 +58,18 @@ Search
                     <i class="bi-basket"></i>
                     <span>
                       {% if product.in_cart %}
-                        Ayyr
+                        {% trans "Remove" %}
                       {% else %}
-                        Gosh
+                        {% trans "Add" %}
                       {% endif %}
                     </span>
                   </button>
                 </form>
               </div>
             </div>
-            <div class="color-11 fw-bold text-truncate">{{ product.product_name }}</div>
+            <div class="color-11 fw-bold text-truncate">{{ product.name }}</div>
             <div class="fw-normal text-truncate small h6 fw-normal">
-              {{ product.product_description }}
+              {{ product.description }}
             </div>
           </div>
         </div>

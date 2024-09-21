@@ -94,9 +94,20 @@ WSGI_APPLICATION = 'pharmacy_pro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'pharmacy',
+        'USER': 'postgres',    # PostgreSQL user
+        'PASSWORD': 'admin',# PostgreSQL user password
+        'HOST': 'localhost',
+        'PORT': '5432',             
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',  # Make sure this is the correct path to your SQLite file
+    #     'OPTIONS': {
+    #         'timeout': 20
+    #     }
+    # }
 }
 
 
@@ -155,19 +166,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
 ]
-
-# PARLER_LANGUAGES = {
-#     None:(
-#         {'code':'en',},
-#         {'code':'ru',},
-#         {'code':'tm',},
-#     ),
-#     'default':{
-#         'fallbacks':['en'],
-#         'hide_unstranslated':False,
-#     }
-# }
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

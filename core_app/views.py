@@ -24,8 +24,6 @@ def custom_set_language(request):
         next_url = request.POST.get('next', '/')
         query_params = request.POST.get('query_params', '')
         settings.LANGUAGE_CODE = language
-        print(settings.LANGUAGE_CODE)
-        print(language, 'Language')
         activate(language)
         request.session[settings.LANGUAGE_COOKIE_NAME] = language
         request.session['django_language'] = language
@@ -54,7 +52,6 @@ def home(request):
             product.in_like = product.id in liked_product_ids
             product.name = product.get_translated_name()
             product.description = product.get_translated_description()
-            print(product.name, product.description)
     ads = Advertisement.objects.filter(end_date__gt=timezone.now(), is_brand=False).prefetch_related('images')
     ads_list = []
     active_ad_ids = set()
@@ -91,18 +88,24 @@ def home(request):
 
 def search_pill(request):
     customer = get_customer(request)
+    current_language = get_language()
     if request.method == "GET":
         search = request.GET.get('searchInput', '').strip()
-        print(search)
-        results = Product.objects.filter(product_name__icontains=search).prefetch_related('images')
+        results = Product.objects.filter(
+            Q(product_name_tm__icontains=search) |
+            Q(product_name_ru__icontains=search) |
+            Q(product_name__icontains=search)
+        ).prefetch_related('images')
+        
         
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         user_like, created = Like.objects.get_or_create(customer=customer)
 
-        # for category in results:
         for product in results:
                 product.in_cart = order.products.filter(id=product.id).exists()
                 product.in_like = user_like.products.filter(id=product.id).exists()
+                product.name = product.get_translated_name()
+                product.description = product.get_translated_description()
     return render(request, 'search_pill.html', {'search_products':results})
 
 

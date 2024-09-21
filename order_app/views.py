@@ -3,11 +3,15 @@ from django.http import JsonResponse, HttpResponse
 import json
 from .models import *
 from customer_app.views import get_customer
+from product_app.models import ProductCategory, Product
 
 def cart(request):
     customer =  get_customer(request)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     items = order.orderitems.select_related('product').prefetch_related('product__images')
+    for item in items:
+        item.product.name = item.product.get_translated_name()
+        item.product.description = item.product.get_translated_description()
     shipping_price = ShippingConfig.get_solo().shipping_price
     shipping_regions = ShippingRegion.objects.all()
     context = {

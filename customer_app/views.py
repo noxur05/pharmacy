@@ -27,7 +27,6 @@ def user_location(request):
         user_lat = request.POST.get('userLatitude')
         user_address = f"{user_city}/{user_region}/{user_country}"
         user_lat_long = f"{user_lat} {user_long}"
-        print("successs")
         customer_location = CustomerLocation.objects.create(customer=customer, ip_address=user_ip, user_address=user_address, user_lat_long=user_lat_long)
     return render(request, 'basket.html')
 
