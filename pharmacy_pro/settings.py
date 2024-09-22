@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'admin_app',
 
     'django_filters',
-    # 'rosetta',
-    # 'parler'
 ]
 
 MIDDLEWARE = [
@@ -101,13 +99,6 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',             
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',  # Make sure this is the correct path to your SQLite file
-    #     'OPTIONS': {
-    #         'timeout': 20
-    #     }
-    # }
 }
 
 
@@ -159,7 +150,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
