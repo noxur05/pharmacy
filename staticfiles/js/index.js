@@ -1,4 +1,25 @@
 $(document).ready(function() {
+    const translations = {
+        'en': {
+            'removed_from_cart': 'Removed from Cart',
+            'added_to_cart': 'Added to Cart',
+            'gosh': 'Add',
+            'ayyr': 'Remove'
+        },
+        'tm': {
+            'removed_from_cart': 'Sarpdan aýryldy',
+            'added_to_cart': 'Sarpana goşuldy',
+            'gosh': 'Goş',
+            'ayyr': 'Aýyr'
+        },
+        'ru': {
+            'removed_from_cart': 'Удалено из корзины',
+            'added_to_cart': 'Добавлено в корзину',
+            'gosh': 'Добавить',
+            'ayyr': 'Удалить'
+        }
+    };
+
     $('.addBtn').click(function(event){
         event.preventDefault();
         let button = $(this);
@@ -10,7 +31,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/product/add/',  // Replace with your view's URL
+            url: '/product/add/',  
             data: {
                 'data': productId,
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
@@ -19,12 +40,18 @@ $(document).ready(function() {
                 console.log('Success:');
                 button.data('in-cart', inCart ? 'False' : 'True');
                 $('#totalQuantity').text(response.total_quantity)
+                let currentLanguage = response.lang;
+                console.log(currentLanguage)
+                
+                function getTranslation(key) {
+                    return translations[currentLanguage][key] || key;
+                }
                 if (response.status == 'deleted') {
                     console.log('Removed from Cart');
-                    button.find('span').text('Gosh');
+                    button.find('span').text(getTranslation('gosh'));
                 } 
                 else {
-                    button.find('span').text('Ayyr');
+                    button.find('span').text(getTranslation('ayyr'));
                     console.log('Added to Cart');
                 }
                 button.prop('disabled', false);

@@ -96,16 +96,13 @@ $(document).ready(function() {
 
     $('.changeLanguage').click(function(){
         let languageInput = $('#languageInput');
-        // let queryParamsInput = $('#queryParams');
-
         languageInput.val($(this).val());
 
         // let queryParams = new URLSearchParams(window.location.search).toString();
-        // queryParamsInput.val(queryParams);
+        // console.log(queryParams);
+        // $('#nextUrl').val(queryParams);
         $('#languageForm').submit();
     });
-
-
 
     if ($('.customBodyCart').length > 0) {
         $('.customBodyCart').last().removeClass('border-bottom');
