@@ -40,9 +40,11 @@
           <th class="bg-dark-subtle">{{field|title}}</th>
         {% endfor %}
         {% for model, info in model_name.items %}
-          {% if info.in_list %}
+          {% if info.in_list%}
             <th class="bg-dark-subtle">Edit</th>
             <th class="bg-dark-subtle">Delete</th>
+          {% elif info.shipping %}
+            <th class="bg-dark-subtle">Edit</th>
           {% endif %}
         {% endfor %}
         </tr>
@@ -62,6 +64,13 @@
             <td><button type="submit" class="editBtn btn btn-sm btn-warning" value="{{obj.id}}"><span class="bi bi-pen"></span></button></td>
           </form>
           <td><button class="deleteBtn btn btn-sm btn-danger" value="{{obj.id}}" data-bs-toggle="modal" data-bs-target="#deleteForm"><span class="bi bi-dash"></span></button></td>
+          {% elif info.shipping %}
+            <form method="POST" action="{% url "admin_app:edit" %}">
+              {% csrf_token %}
+              <input type="hidden" value="{{model}}" name="model">
+              <input type="hidden" value="{{obj.id}}" name="id">
+              <td><button type="submit" class="editBtn btn btn-sm btn-warning" value="{{obj.id}}"><span class="bi bi-pen"></span></button></td>
+            </form>
           {% endif %}
         {% endfor %}
         </tr>

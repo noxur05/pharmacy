@@ -20,13 +20,15 @@ Search
           <div
             class="position-relative goods-size overflow-hidden rounded-2 bg-white shadow-sm border img-hover mb-2">
             {% for image in product.images.all %}
-            <img class="w-100 h-100 pe-0 z-0" src="{{ image.image.url }}" alt="">
-            <div class="position-absolute top-0 end-0 z-1 m-1">
+            <a href="{% url "product_app:profile" product.id %}">
+              <img class="w-100 h-100 pe-0 z-0" src="{{ image.image.url }}" alt="">
+            </a>
+            {% comment %} <div class="position-absolute top-0 end-0 z-1 m-1">
               <a href="{{ image.image.url }}" class="border-0 bg-white btn btn-sm rounded-2 overflow-hidden"
                 data-fancybox="gallery">
                 <i class="bi bi-zoom-in"></i>
               </a>
-            </div>
+            </div> {% endcomment %}
             {% endfor %}
             <div class="position-absolute bottom-0 start-0 z-1">
               <span class="rounded-bottom-0 rounded-end-2 bg-8 color-1 px-2 py-1 small">{{ product.sale_price }} TMT</span>

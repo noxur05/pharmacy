@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-21 18:41+0500\n"
+"POT-Creation-Date: 2024-09-23 21:50+0500\n"
 "PO-Revision-Date: 2024-09-09 00:51+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: .\ads_app\models.py:14
+#: .\ads_app\models.py:12
 msgid "title"
 msgstr "at"
 
-#: .\ads_app\models.py:15 .\product_app\templates\product_profile.html:39
+#: .\ads_app\models.py:13 .\product_app\templates\product_profile.html:39
 msgid "description"
 msgstr "Düşündiriş"
 
@@ -30,14 +30,14 @@ msgstr "Düşündiriş"
 msgid "Home"
 msgstr "Baş sahypa"
 
-#: .\core_app\templates\index.html:87 .\core_app\templates\search_pill.html:61
-#: .\product_app\templates\custom_category.html:62
+#: .\core_app\templates\index.html:87 .\core_app\templates\search_pill.html:64
+#: .\product_app\templates\custom_category.html:64
 #: .\product_app\templates\product_profile.html:70
 msgid "Remove"
 msgstr "Çykar"
 
-#: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:63
-#: .\product_app\templates\custom_category.html:64
+#: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:66
+#: .\product_app\templates\custom_category.html:66
 #: .\product_app\templates\product_profile.html:72
 msgid "Add"
 msgstr "Goş"
@@ -47,7 +47,7 @@ msgstr "Goş"
 msgid "Search"
 msgstr "Gözle"
 
-#: .\order_app\templates\basket.html:19 .\order_app\templates\basket.html:100
+#: .\order_app\templates\basket.html:19 .\order_app\templates\basket.html:102
 msgid "Basket"
 msgstr "Sebet"
 
@@ -55,73 +55,77 @@ msgstr "Sebet"
 msgid "Clear"
 msgstr "Arassala"
 
-#: .\order_app\templates\basket.html:107
+#: .\order_app\templates\basket.html:109
 #: .\product_app\templates\product_profile.html:29
 msgid "Price"
 msgstr "Baha"
 
-#: .\order_app\templates\basket.html:117
+#: .\order_app\templates\basket.html:119
 msgid "Delivery"
 msgstr "Eltip bermek"
 
-#: .\order_app\templates\basket.html:127
+#: .\order_app\templates\basket.html:129
 msgid "Total price"
 msgstr "Jemi baha"
 
-#: .\order_app\templates\basket.html:136
+#: .\order_app\templates\basket.html:138
 msgid "Order"
 msgstr "Sargyt Etmek"
 
-#: .\order_app\templates\basket.html:147
+#: .\order_app\templates\basket.html:149
 msgid "Order Information"
 msgstr "Sargyt Maglumatlary"
 
-#: .\order_app\templates\basket.html:152
+#: .\order_app\templates\basket.html:154
 #: .\product_app\templates\product_profile.html:24
 msgid "Name"
 msgstr "Ady"
 
-#: .\order_app\templates\basket.html:156
+#: .\order_app\templates\basket.html:158
 msgid "Phone Number"
 msgstr "Telefon Belgi"
 
-#: .\order_app\templates\basket.html:163
+#: .\order_app\templates\basket.html:165
 msgid "Region"
 msgstr "Sebit"
 
-#: .\order_app\templates\basket.html:173
+#: .\order_app\templates\basket.html:175
 msgid "Address"
 msgstr "Salgy"
 
-#: .\order_app\templates\basket.html:177
+#: .\order_app\templates\basket.html:179
 msgid "Note"
 msgstr "Bellik"
 
 #: .\order_app\templates\basket.html:180
+msgid "Specify when it should be delivered"
+msgstr "Haçan getirmelidigini belläň"
+
+#: .\order_app\templates\basket.html:182
 msgid "Payment Method"
 msgstr "Toleg Usuly"
 
-#: .\order_app\templates\basket.html:185
+#: .\order_app\templates\basket.html:187
 msgid "Cash Payment"
 msgstr "Nagt Toleg"
 
-#: .\order_app\templates\basket.html:191
+#: .\order_app\templates\basket.html:193
 msgid "Bank Card"
 msgstr "Bank Karty"
 
-#: .\order_app\templates\basket.html:197
+#: .\order_app\templates\basket.html:199
 msgid "Confirm"
 msgstr "Tassyklamak"
 
-#: .\pharmacy_pro\settings.py:128 .\templates\header.html:113
+#: .\pharmacy_pro\settings.py:131 .\templates\header.html:113
 msgid "English"
 msgstr "Iňlis"
 
-#: .\pharmacy_pro\settings.py:129 .\templates\header.html:118
+#: .\pharmacy_pro\settings.py:132 .\templates\header.html:118
 msgid "Russian"
 msgstr "Rus"
 
-#: .\pharmacy_pro\settings.py:130 .\templates\header.html:108
+#: .\pharmacy_pro\settings.py:133 .\templates\header.html:108
 msgid "Turkmen"
 msgstr "Türkmen"
 

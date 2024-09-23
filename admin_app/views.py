@@ -21,9 +21,11 @@ def admin_dashboard(request):
 
     model_class = selected_model_form()._meta.model
     in_list = model_class in ADD_OBJECT_LIST
+    shipping_config = model_class in SHIPPING_REGION_LIST
     model_name = {
         selected_model_name: {
-            'in_list':in_list
+            'in_list':in_list,
+            'shipping':shipping_config
         }
     }
     selected_model_fields = []

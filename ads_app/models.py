@@ -3,9 +3,7 @@ from django.db.models.signals import pre_delete, pre_save, post_save
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 from django.utils import timezone
-
-from parler.models import TranslatableModel, TranslatedFields
-
+    
 from PIL import Image
 import os
 import io
@@ -20,7 +18,7 @@ class Advertisement(models.Model):
     is_brand = models.BooleanField(default=False, null=True)
 
     def __str__(self):
-        return self.safe_translation_getter('title', default='')
+        return self.title
 
     def is_current(self):
         now = timezone.now()

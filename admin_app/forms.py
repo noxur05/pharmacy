@@ -53,7 +53,7 @@ class ProductForm(forms.ModelForm):
     
     class Meta:
         model = Product
-        fields = ("category_name","product_name", "product_description", "original_price", "sale_price", "stock",)
+        fields = "__all__"
     
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -61,27 +61,34 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category_name'].widget.attrs['class'] = 'form-control'
         self.fields['product_name'].widget.attrs['class'] = 'form-control'
+        self.fields['product_name_ru'].widget.attrs['class'] = 'form-control'
+        self.fields['product_name_tm'].widget.attrs['class'] = 'form-control'
         self.fields['product_description'].widget.attrs['class'] = 'form-control'
+        self.fields['product_description_ru'].widget.attrs['class'] = 'form-control'
+        self.fields['product_description_tm'].widget.attrs['class'] = 'form-control'
         self.fields['original_price'].widget.attrs['class'] = 'form-control'
         self.fields['sale_price'].widget.attrs['class'] = 'form-control'
         self.fields['stock'].widget.attrs['class'] = 'form-control'
+
 
 class ProductCategoryForm(forms.ModelForm):
     
     class Meta:
         model = ProductCategory
-        fields = ("category_name",)
+        fields = "__all__"
     
     def __init__(self, *args, **kwargs):
         super(ProductCategoryForm, self).__init__(*args, **kwargs)
 
         self.fields['category_name'].widget.attrs['class'] = 'form-control'
+        self.fields['category_name_ru'].widget.attrs['class'] = 'form-control'
+        self.fields['category_name_tm'].widget.attrs['class'] = 'form-control'
 
 class ProductImageForm(forms.ModelForm):
     
     class Meta:
         model = ProductImage
-        fields = ("product_name","image",)
+        fields = "__all__"
     
     def __init__(self, *args, **kwargs):
         super(ProductImageForm, self).__init__(*args, **kwargs)
@@ -191,6 +198,7 @@ MODEL_FORMSET_MAP = {
 }
 
 ADD_OBJECT_LIST = [Product, ProductImage, ProductCategory, ShippingRegion, Advertisement, AdvertisementImage]
+SHIPPING_REGION_LIST = [ShippingConfig]
 
 
 
