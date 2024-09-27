@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import get_language
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 from customer_app.views import get_customer
 from order_app.models import *
+from order_app.serializers import OrderItemSerializer
 from like_app.models import *
 from .models import *
 
@@ -20,22 +26,25 @@ def custom_pills(request, category_id):
             product.name = product.get_translated_name()
     return render(request, 'custom_category.html', {'spec_categories':spec_category})
 
+@api_view(['POST'])
 def product(request):
-    if request.method == 'POST':
-        data = request.POST.get('data')
-        customer =  get_customer(request)
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        product.in_cart = order.products.filter(id=data).exists()
-        if product.in_cart:
-            orderItem = OrderItem.objects.get(order=order, product_id=data)
-            orderItem.delete()
-            status = 'deleted'
-        else:
-            orderItem, created = OrderItem.objects.get_or_create(order=order, product_id=data)
-            orderItem.save()
-            status = 'saved'
+    # if request.method == 'POST':
+        # data = request.POST.get('data')
+    data = request.data.get('data')
+    customer =  get_customer(request)
+
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    product.in_cart = order.products.filter(id=data).exists()
+    if product.in_cart:
+        orderItem = OrderItem.objects.get(order=order, product_id=data)
+        orderItem.delete()
+        status_message = 'deleted'
+    else:
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product_id=data)
+        orderItem.save()
+        status_message = 'saved'
     categories = ProductCategory.objects.all().prefetch_related('products')
-    return JsonResponse({'total_quantity':order.get_total_quantity(), 'status':status, 'lang':get_language()})
+    return Response({'total_quantity':order.get_total_quantity(), 'status':status_message, 'lang':get_language()}, status=status.HTTP_200_OK)
 
 def profile(request, product_id):
     product = Product.objects.get(id=product_id)

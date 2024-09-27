@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zg)u@#xh_8rf0@%*8xqjt+-&hj-ew^q)gaf+03y+k23ovwoy0s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://f188-93-171-220-158.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://e637-93-171-220-158.ngrok-free.app']
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'admin_app',
 
     'django_filters',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

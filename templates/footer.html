@@ -1,23 +1,48 @@
 {% load static %}
+{% load i18n %}
 <div id="pageFooter">
-  <footer class="container-fluid bg-success-subtle py-3 margin-top-auto ">
+  <div id="footerPush"></div>
+  <footer class="container-fluid fixed-bottom bg-success-subtle py-1 margin-top-auto d-lg-none ">
     <div class="container-xxl">
-      <div class="row row-cols-1 row-cols-md-2">
+      <div class="row row-cols-5 g-1">
         <div class="col">
-          <div class="position-relative ">
-            <div class="fw-bold h4 pt-4 color-11">
-              Dermanhana
-            </div>
-            <div class="position-absolute color-11 top-0 start-0 mt-1 small">
-              <div class="small">
-                Online
-              </div>
-            </div>
-            <div class="position-absolute row justify-content-center top-0 ms-5" id="logo">
-              <div class="logo-size p-0">
-                <img class="w-100" src="{% static "media/icons/medical.png" %}" alt="">
-              </div>
-            </div>
+          <div class="d-flex w-100 justify-content-center ">
+            <a class="btn {% if request.path == '/' %}active{% endif %} fs-5" href="/">
+              <span class="bi bi-house"></span>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex w-100 justify-content-center">
+            <a class="btn fs-5" href="#">
+              <span class="bi bi-telephone"></span>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex w-100 justify-content-center">
+            {% url 'like_app:favorite' as favorite_url %}
+            <a class="btn {% if request.path == favorite_url %}active{% endif %} fs-5" href="{% url "like_app:favorite" %}">
+                <span class="bi bi-heart"></span>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex w-100 justify-content-center">
+            <a class="btn fs-5" href="#">
+              <span class="bi bi-exclamation-circle"></span>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex w-100 justify-content-center">
+            {% url "order_app:cart" as cart_url %}
+            <a class="btn {% if request.path == cart_url %}active{% endif %} fs-5 position-relative" href="{% url "order_app:cart" %}">
+              <span class=""><i class="bi-basket"></i></span>
+              <span class="totalQuantity position-absolute top-0 ms-1 mt-2 px-2 py-1 translate-middle badge rounded-pill bg-danger" id="totalQuantity">
+                {{total_quantity}}
+              </span>
+            </a>
           </div>
         </div>
       </div>

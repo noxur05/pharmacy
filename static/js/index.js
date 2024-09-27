@@ -31,15 +31,19 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/product/add/',  
-            data: {
-                'data': productId,
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            url: '/product/add/', 
+            contentType: 'application/json',
+            dataType: 'json', 
+            data: JSON.stringify({ 
+                'data': productId  
+            }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
             },
             success: function(response){
                 console.log('Success:');
                 button.data('in-cart', inCart ? 'False' : 'True');
-                $('#totalQuantity').text(response.total_quantity)
+                $('.totalQuantity').text(response.total_quantity)
                 let currentLanguage = response.lang;
                 console.log(currentLanguage)
                 

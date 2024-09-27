@@ -34,7 +34,7 @@ msgstr "Baş sahypa"
 #: .\product_app\templates\custom_category.html:64
 #: .\product_app\templates\product_profile.html:70
 msgid "Remove"
-msgstr "Çykar"
+msgstr "Aýyr"
 
 #: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:66
 #: .\product_app\templates\custom_category.html:66

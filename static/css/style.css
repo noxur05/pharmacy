@@ -149,6 +149,13 @@ input[type="number"]:focus{
     user-select: none;
 }
 
+.custom-bd-toc {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+    overflow-y: auto;
+}
+
 @media (min-width: 992px) {
     .bd-toc {
         position: -webkit-sticky;

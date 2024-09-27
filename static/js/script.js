@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 $(window).on("ready load resize", function () {
     $("#pageBody").css({"margin-bottom": -$("#pageFooter").height()});
     $("#pagePush").css({"height": $("#pageFooter").height()});
+    $("#footerPush").css({"height": $("footer").height()});
 });
 
 $(document).ready(function() {
@@ -133,16 +134,20 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '/order/increase/',
-                data: {
-                    'data': button.val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                contentType: 'application/json',
+                dataType: 'json', 
+                data: JSON.stringify({ 
+                    'data': button.val()  
+                }),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
                 },
                 success: function(response){
                     console.log('Success:');
                     quantity.text(response.quantity);
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
-                    $('#totalQuantity').text(response.total_quantity)
+                    $('.totalQuantity').text(response.total_quantity)
                     button.attr("disabled", false);
                 },
                 error: function(response){
@@ -173,16 +178,20 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '/order/decrease/', 
-                data: {
-                    'data': button.val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                contentType: 'application/json',
+                dataType: 'json', 
+                data: JSON.stringify({ 
+                    'data': button.val()  
+                }),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
                 },
                 success: function(response){
                     console.log('Success: Decreased');
                     quantity.text(response.quantity);
                     $(".totalPrice").text(response.total_price.toFixed(2))
                     $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
-                    $('#totalQuantity').text(response.total_quantity)
+                    $('.totalQuantity').text(response.total_quantity)
                     button.attr("disabled", false);
                 },
                 error: function(response){
@@ -210,16 +219,20 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/order/order-remove/',
-            data: {
-                'data': button.val(),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({ 
+                'data': button.val()  
+            }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
             },
             success: function(response){
                 console.log('Success: Removed from cart');
                 button.closest(".customBodyCart").remove();
                 $(".totalPrice").text(response.total_price.toFixed(2))
                 $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
-                $('#totalQuantity').text(response.total_quantity)
+                $('.totalQuantity').text(response.total_quantity)
                 $("#itemsList").remove()
                 $('#emptyBasket').removeClass('d-none')
                 $('#openForm').addClass('disabled')
@@ -243,7 +256,7 @@ $(document).ready(function() {
                 button.closest(".customBodyCart").remove();
                 $(".totalPrice").text(response.total_price.toFixed(2))
                 $(".totalItemsPrice").text(response.total_items_price.toFixed(2))
-                $('#totalQuantity').text(response.total_quantity)
+                $('.totalQuantity').text(response.total_quantity)
 
                 if ($('.customBodyCart').length > 0) {
                     $('.customBodyCart').last().removeClass('border-bottom');
@@ -304,7 +317,7 @@ $(document).ready(function() {
                         $("#itemsList").remove()
                         $('#emptyBasket').removeClass('d-none')
                         $('#openForm').addClass('disabled')
-                        $('#totalQuantity').text(response.total_quantity)
+                        $('.totalQuantity').text(response.total_quantity)
                     },
                     error: function(response){
                         console.log('Error:', response);

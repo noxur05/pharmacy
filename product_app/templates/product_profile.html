@@ -7,36 +7,36 @@
 
 {% block content %}
 <div class="container-xxl">
-    <div class="row my-3 mx-2">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-4 border rounded-3">
+    <div class="row my-3 mx-2 justify-content-center">
+        <div class="col-12 col-md-6 col-lg-3 border rounded-3">
             {% for image in product.images.all %}
             <img class="w-100 h-100" src="{{image.image.url}}">
             {% endfor %}
         </div>
-        <div class="col-12 col-md-8 fw-bold text-secondary">
-            <div class="">{% trans "Categories" %}:
+        <div class="col-12 col-md-6 col-lg-9 fw-bold text-secondary">
+            <div class="mb-2">{% trans "Categories" %}:
                 {% for category in product_cat %}
                 <span class="fw-normal text-dark">
                     {{category }}
                 </span>
                 {% endfor %}
             </div>
-            <div class="">{% trans "Name" %}:
+            <div class="mb-2">{% trans "Name" %}:
                 <span class="fw-normal text-dark">
                     {{product.name}}
                 </span>
             </div>
-            <div class="">{% trans "Price" %}:
+            <div class="mb-2">{% trans "Price" %}:
                 <span class="fw-normal text-dark">
                     {{product.sale_price}} TMT
                 </span>
             </div>
-            <div class="">{% trans "Stock" %}:
+            <div class="mb-2">{% trans "Stock" %}:
                 <span class="fw-normal text-dark">
                     {{product.stock}}
                 </span>
             </div>
-            <div class="">{% trans "description" %}:
+            <div class="mb-2">{% trans "description" %}:
                 <span class="fw-normal text-dark">
                     {{product.description}}
                 </span>
@@ -57,7 +57,7 @@
                       </button>
                     </form>
                   </div>
-                  <div class="" style="width: calc(100% - 36px);">
+                  <div class="" style="width: calc(200px - 36px);">
                     <!-- Add to cart form -->
                     <form method="POST" class="add-form">
                       {% csrf_token %}

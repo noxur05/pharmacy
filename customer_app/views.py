@@ -4,7 +4,6 @@ from .models import *
 import uuid
 
 def get_customer(request):
-    """Helper function to get customer based on authentication or session."""
     if request.user.is_authenticated:
         return request.user.customer
     else:
