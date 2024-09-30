@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-zg)u@#xh_8rf0@%*8xqjt+-&hj-ew^q)gaf+03y+k23ovwoy0s
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://e637-93-171-220-158.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://adf8-93-171-220-158.ngrok-free.app']
 
 
 # Application definition
@@ -149,12 +149,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
+if DEBUG:
+    STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-]
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
@@ -166,7 +169,7 @@ LOCALE_PATHS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SESSION_COOKIE_AGE = 31536000
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
