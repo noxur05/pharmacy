@@ -22,11 +22,9 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 from django.views.static import serve
 
-
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 ]
-
 
 urlpatterns += [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
@@ -40,7 +38,6 @@ urlpatterns += [
     path('ads/', include('ads_app.urls', namespace="ads_app")),
     path('admin/', include('admin_app.urls', namespace="admin_app")),
 ]
-
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

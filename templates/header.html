@@ -3,6 +3,7 @@
 <header class="bg-success-subtle shadow-sm sticky-top">
   <nav class="navbar navbar-expand-lg pb-1">
     <div class="container-xxl">
+
         <a class="navbar-brand" href="#">
           <div class="position-relative "> 
             <div class="fw-bold h4 pt-4 color-11">
@@ -19,12 +20,8 @@
               </div>
             </div>
           </div>
-          {% comment %} <div class="">
-            <div class="">
-              <img class="w-50" src="{% static "media/icons/online_dermanhana1.webp" %}" alt="Online Dermanhana">
-            </div>
-          </div> {% endcomment %}
         </a>
+
       <div class="d-lg-none">
         <div class="row g-2">
           <div class="col-auto dropdown">
@@ -82,19 +79,7 @@
           </div>
         </div>
       </div>
-      {% comment %} <div class="w-100 d-lg-none">
-        <form method="GET" action="{% url "search-pill" %}">
-          <div class="btn btn-md bg-light btn-outline-light search-place rounded-2 px-3 pe-lg-1 nowrap position-relative">
-            <input class="searchInput bg-transparent border-0 w-100 me-4 " name="searchInput" type="search" placeholder="{% trans "Search" %}...">
-            <div class="position-absolute end-0 me-3">
-              {% csrf_token %}
-              <button class="searchButton border-0 bg-transparent" type="submit">
-                <i class="bi-search color-11"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div> {% endcomment %}
+
       <div class="collapse navbar-collapse row h-100 align-items-lg-start" id="navbarmenu">
         <div class="col-12 col-lg-8 offset-lg-1">
           <div class="row h-100 align-items-center">
@@ -132,7 +117,7 @@
                   </div>
                 </li>
                 <li class="nav-item col-12 col-lg">
-                  <a class="nav-link color-11 p-0" href="#">{% trans "Contact" %}</a>
+                  <a class="nav-link color-11 p-0" href="{% url "ads_app:brands" %}">{% trans "Brands" %}</a>
                 </li>
                 <li class="nav-item col-12 col-lg">
                   <a class="nav-link color-11 p-0" href="#">{% trans "About Us" %}</a>
@@ -183,6 +168,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </nav>
 </header>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Brands" %}{% endblock title %}
+
+{% block links_and_css %}{% endblock links_and_css %}
+
+{% block content %}
+<div class="my-5">
+    <div class="container-xxl">
+      <div class="h4 mt-5"> 
+      {% trans "Brands" %}
+      </div>
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
+        {% for brand in brand_ads %}
+        <div class="col">
+          <div
+            class="position-relative overflow-hidden rounded-2 bg-white shadow-sm border img-hover mb-2">
+            {% for image in brand.images.all %}
+            <a href="{{brand.url}}">
+              <img class="img-fluid pe-0 z-0" src="{{ image.image.url }}" alt="">
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

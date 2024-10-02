@@ -14,8 +14,9 @@
         </div>
         <div class="col">
           <div class="d-flex w-100 justify-content-center">
-            <a class="btn fs-5" href="#">
-              <span class="bi bi-telephone"></span>
+            {% url 'ads_app:brands' as brands_url %}
+            <a class="btn fs-5 {% if request.path == 'brands_url' %}active{% endif %}" href="{% url "ads_app:brands" %}">
+              <span class="bi bi-tags"></span>
             </a>
           </div>
         </div>

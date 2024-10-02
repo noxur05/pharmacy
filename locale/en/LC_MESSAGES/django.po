@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-23 21:50+0500\n"
+"POT-Creation-Date: 2024-10-02 22:05+0500\n"
 "PO-Revision-Date: 2024-09-09 00:50+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,24 +27,28 @@ msgstr "title"
 msgid "description"
 msgstr "Description"
 
-#: .\core_app\templates\index.html:6 .\templates\header.html:59
+#: .\ads_app\templates\brands.html:4 .\ads_app\templates\brands.html:12
+#: .\templates\header.html:120
+msgid "Brands"
+msgstr "Brands"
+
+#: .\core_app\templates\index.html:6 .\templates\header.html:102
 msgid "Home"
 msgstr "Home"
 
-#: .\core_app\templates\index.html:87 .\core_app\templates\search_pill.html:64
+#: .\core_app\templates\index.html:87 .\core_app\templates\search_pill.html:57
 #: .\product_app\templates\custom_category.html:64
 #: .\product_app\templates\product_profile.html:70
 msgid "Remove"
 msgstr "Remove"
 
-#: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:66
+#: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:59
 #: .\product_app\templates\custom_category.html:66
 #: .\product_app\templates\product_profile.html:72
 msgid "Add"
 msgstr "Add"
 
-#: .\core_app\templates\search_pill.html:15 .\templates\header.html:30
-#: .\templates\header.html:47
+#: .\core_app\templates\search_pill.html:15 .\templates\header.html:90
 msgid "Search"
 msgstr "Search"
 
@@ -118,19 +122,22 @@ msgstr "Bank Card"
 msgid "Confirm"
 msgstr "Confirm"
 
-#: .\pharmacy_pro\settings.py:131 .\templates\header.html:113
+#: .\pharmacy_pro\settings.py:132 .\templates\header.html:44
+#: .\templates\header.html:156
 msgid "English"
 msgstr "English"
 
-#: .\pharmacy_pro\settings.py:132 .\templates\header.html:118
+#: .\pharmacy_pro\settings.py:133 .\templates\header.html:49
+#: .\templates\header.html:161
 msgid "Russian"
 msgstr "Russian"
 
-#: .\pharmacy_pro\settings.py:133 .\templates\header.html:108
+#: .\pharmacy_pro\settings.py:134 .\templates\header.html:39
+#: .\templates\header.html:151
 msgid "Turkmen"
 msgstr "Turkmen"
 
-#: .\product_app\templates\product_profile.html:17 .\templates\header.html:65
+#: .\product_app\templates\product_profile.html:17 .\templates\header.html:108
 msgid "Categories"
 msgstr "Categories"
 
@@ -138,17 +145,16 @@ msgstr "Categories"
 msgid "Stock"
 msgstr "Stock"
 
-#: .\templates\header.html:62
+#: .\templates\header.html:105
 msgid "Wishlist"
 msgstr "Wishlist"
 
-#: .\templates\header.html:77
-msgid "Contact"
-msgstr "Contact"
-
-#: .\templates\header.html:80
+#: .\templates\header.html:123
 msgid "About Us"
 msgstr "About Us"
+
+#~ msgid "Contact"
+#~ msgstr "Contact"
 
 #, fuzzy
 #~| msgid "Categories"
