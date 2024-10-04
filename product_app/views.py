@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import get_language
 
@@ -11,6 +11,10 @@ from order_app.models import *
 from order_app.serializers import OrderItemSerializer
 from like_app.models import *
 from .models import *
+
+import google.generativeai as genai
+import sys
+import queue
 
 def custom_pills(request, category_id):
     spec_category = ProductCategory.objects.all().filter(id=category_id).prefetch_related('products')
@@ -28,8 +32,6 @@ def custom_pills(request, category_id):
 
 @api_view(['POST'])
 def product(request):
-    # if request.method == 'POST':
-        # data = request.POST.get('data')
     data = request.data.get('data')
     customer =  get_customer(request)
 
@@ -61,4 +63,30 @@ def profile(request, product_id):
     product.description = product.get_translated_description()
     product.name = product.get_translated_name()
     return render(request, 'product_profile.html', {"product_cat":translated_categories, 'images':images, "product":product})
+
+languages = {
+    'tm':'Turkmen',
+    'ru':'Russian',
+    'en':'English',
+}
+
+@api_view(['POST'])
+def ai_response(request):
+    current_language = get_language()
+    genai.configure(api_key="AIzaSyAK-he57jjZpBr8q-Cdg9cAb8w7jkOyMTI")
+    generation_config = {"temperature": 0.9, "top_p": 1, "top_k": 1, "max_output_tokens": 2048}
+    prompt = request.data.get("data")
+    product = get_object_or_404(Product, id=prompt)
+    model = genai.GenerativeModel('gemini-pro', generation_config=generation_config)
+
+    prompt = f"System: Create a wide description about the given product name in {languages[current_language]} language.\nUser: {product}"
+    response = model.generate_content([prompt])
+    if response._done and response._result.candidates:
+        candidate = response._result.candidates[0]
+        content_parts = candidate.content.parts
+        generated_text = content_parts[0].text if content_parts else "No text parts available."
+    else:
+        generated_text = "No candidates available."
+    print(generated_text)
+    return Response({'description':generated_text}, status=status.HTTP_200_OK)
 # Create your views here.

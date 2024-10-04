@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-zg)u@#xh_8rf0@%*8xqjt+-&hj-ew^q)gaf+03y+k23ovwoy0s
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://64c4-93-171-220-158.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://f964-93-171-220-158.ngrok-free.app']
 
 
 # Application definition
@@ -96,8 +96,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':'pharmacy',
-        'USER': 'postgres',    # PostgreSQL user
-        'PASSWORD': 'admin',# PostgreSQL user password
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432',             
     }
@@ -153,8 +153,8 @@ if DEBUG:
     STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     ]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# else:
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 

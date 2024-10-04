@@ -243,6 +243,32 @@ $(document).ready(function() {
         });
     });
 
+    $('.productDescript').click(function(descript){
+        descript.preventDefault();
+        let button = $(this);
+        console.log(button.val());
+        $.ajax({
+            type: 'POST',
+            url: '/product/response/',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({ 
+                'data': button.val()
+            }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
+            },
+            success: function(response){
+                console.log('Success: Description Created');
+                $('.descriptBody').text(response.description)
+
+            },
+            error: function(response){
+                console.log('Error:', response);
+            }
+        });
+    });
+
     function removeItem(button){
         $.ajax({
             type: 'POST',

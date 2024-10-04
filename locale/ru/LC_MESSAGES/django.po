@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 22:05+0500\n"
+"POT-Creation-Date: 2024-10-04 21:00+0500\n"
 "PO-Revision-Date: 2024-09-09 00:49+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,13 +40,13 @@ msgstr "Главная"
 
 #: .\core_app\templates\index.html:87 .\core_app\templates\search_pill.html:57
 #: .\product_app\templates\custom_category.html:64
-#: .\product_app\templates\product_profile.html:70
+#: .\product_app\templates\product_profile.html:71
 msgid "Remove"
 msgstr "Удалить"
 
 #: .\core_app\templates\index.html:89 .\core_app\templates\search_pill.html:59
 #: .\product_app\templates\custom_category.html:66
-#: .\product_app\templates\product_profile.html:72
+#: .\product_app\templates\product_profile.html:73
 msgid "Add"
 msgstr "Добавить"
 
@@ -146,6 +146,14 @@ msgstr "Категории"
 #: .\product_app\templates\product_profile.html:34
 msgid "Stock"
 msgstr "Наличие"
+
+#: .\product_app\templates\product_profile.html:82
+msgid "AI advisor"
+msgstr "AI предложитель"
+
+#: .\product_app\templates\product_profile.html:92
+msgid "Loading..."
+msgstr "Загрузка"
 
 #: .\templates\header.html:105
 msgid "Wishlist"
